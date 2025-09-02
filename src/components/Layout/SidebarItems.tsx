@@ -53,20 +53,7 @@ export const sidebarItems: Array<SidebarItem> = [
     title: "Dashboard",
     href: "/dashboard",
     icon: <DashboardIcon fontSize="small" />,
-    nestedItems: [
-      {
-        title: "Transactions",
-        href: "/dashbord/transactions",
-      },
-      {
-        title: "Inquiries and Reports",
-        href: "/dashbord/inquiriesandreports",
-      },
-      {
-        title: "Maintenance",
-        href: "/dashbord/maintenance",
-      },
-    ],
+    
   },
   {
     title: "Sales",

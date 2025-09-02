@@ -216,7 +216,6 @@ export default function MainLayout({ children }: Props) {
                   noWrap
                   component="div"
                   sx={{
-                    backgroundColor: "#010f24",
                     color: "var(--pallet-blue)",
                     display: "flex",
                     marginRight: "0.5rem",
@@ -434,6 +433,7 @@ const DrawerContent = ({
                 title={item.title}
                 disabled={item.disabled}
                 handleDrawerClose={handleDrawerClose}
+                
               />
             </ListItem>
           );
@@ -690,6 +690,7 @@ const NestedItem = React.memo(
                     title={nestedItem.title}
                     disabled={nestedItem.disabled}
                     handleDrawerClose={handleDrawerClose}
+                    isSubItem
                   />
                 </ListItem>
               );
@@ -707,10 +708,11 @@ interface LinkButtonProps {
   title: string;
   disabled?: boolean;
   handleDrawerClose: () => void;
+  isSubItem?: boolean;
 }
 
 export const LinkButton = React.memo(
-  ({ to, icon, title, disabled, handleDrawerClose }: LinkButtonProps) => {
+  ({ to, icon, title, disabled, handleDrawerClose, isSubItem }: LinkButtonProps) => {
     const { pathname } = useLocation();
     const { isTablet } = useIsMobile();
 
@@ -719,7 +721,7 @@ export const LinkButton = React.memo(
     return (
       <Link
         to={to}
-        style={{ width: 220 }}
+        style={{ width: "230px" }}
         onClick={() => {
           if (isTablet) handleDrawerClose();
         }}
@@ -730,7 +732,7 @@ export const LinkButton = React.memo(
             paddingY: "0.8rem",
             alignItems: "center",
             justifyContent: "flex-start",
-            width: "180px",
+            width: isSubItem ? "180px" : "230px",
             backgroundColor: isMatch ? "#72a4ffff" : "transparent",
             borderLeft: isMatch ? "4px solid #315fb6" : "none",
             borderRadius: "4px",

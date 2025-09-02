@@ -33,6 +33,8 @@ import SetupMaintenance from "./views/Setup/Maintenance/SetupMaintenance";
 import Dashboard from "./views/Dashboard/Dashboard";
 import CompanySetup from "./views/Setup/CompanySetup/CompanySetup";
 import Miscellaneous from "./views/Setup/Miscellaneous/Miscellaneous";
+import FixedAssestsMaintenance from "./views/FixedAssets/Maintenance/FixedAssestsMaintenance";
+import FixedAssestsInquiriesAndReports from "./views/FixedAssets/InquiriesAndReports/FixedAssestsInquiriesAndReports";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -853,11 +855,11 @@ const AppRoutes = () => {
       />
       <Route
         path="/fixedassets/inquiriesandreports"
-        element={withLayout(MainLayout, FixedAssestsTransactions)}
+        element={withLayout(MainLayout, FixedAssestsInquiriesAndReports)}
       />
       <Route
         path="/fixedassets/maintenance"
-        element={withLayout(MainLayout, DimensionTransactions)}
+        element={withLayout(MainLayout, FixedAssestsMaintenance)}
       />
 
       <Route
