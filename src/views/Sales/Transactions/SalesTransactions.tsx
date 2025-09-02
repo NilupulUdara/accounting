@@ -116,9 +116,6 @@ function SalesTransactions() {
 
   return (
     <Stack sx={{ minHeight: "100vh", backgroundColor: "#f9f9f9", p: 3 }}>
-      <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3, color: "#333" }}>
-        Transactions
-      </Typography>
 
       <Grid container spacing={2}>
         {allItems.map((item, index) => (

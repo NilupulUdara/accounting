@@ -319,7 +319,7 @@ export default function MainLayout({ children }: Props) {
           <DrawerContent handleDrawerClose={handleDrawerClose} />
         </Drawer>
       )}
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, }}>
         <DrawerHeader />
         {children}
       </Box>
@@ -363,7 +363,7 @@ const DrawerContent = ({
           Accounting
         </Typography>
       </DrawerHeader>
-      <Divider sx={{ marginBottom: "1rem", backgroundColor: "#7db0ff" }} />
+      {/* <Divider sx={{ marginBottom: "1rem", }} /> */}
       <Box
         sx={{
           height: "calc(100vh - 75px)",
@@ -372,6 +372,19 @@ const DrawerContent = ({
           overflowX: "hidden",
         }}
       >
+        <Typography
+          variant="subtitle2"
+          sx={{
+            px: 2,
+            py: 1,
+            fontWeight: 600,
+            fontSize: "0.75rem",
+            letterSpacing: "0.05rem",
+          }}
+        >
+          Menu
+        </Typography>
+
         {sidebarItems.map((item, index) => {
           if (item?.accessKey && !userPermissionObject[`${item?.accessKey}`])
             return null;
@@ -413,7 +426,7 @@ const DrawerContent = ({
             <ListItem
               key={item.accessKey || item.href || index}
               disableGutters
-              sx={{ paddingY: "1px", marginLeft: "1rem" }}
+              sx={{ paddingY: "1px", marginLeft: "1rem"}}
             >
               <LinkButton
                 to={item.href}
@@ -426,7 +439,7 @@ const DrawerContent = ({
           );
         })}
 
-        <Divider sx={{ backgroundColor: "var(--pallet-grey)", marginTop: "1rem" }} />
+        <Divider sx={{ backgroundColor: "var(--pallet-grey)", marginTop: "1rem", width: "80%", mx:"auto" }} />
 
         <Box
           sx={{
@@ -440,7 +453,6 @@ const DrawerContent = ({
             variant="subtitle2"
             sx={{
               fontWeight: 600,
-              color: "#b0b8c4",
               mb: 1,
               fontSize: "0.75rem",
               letterSpacing: "0.05rem",
@@ -472,7 +484,6 @@ const DrawerContent = ({
               <Typography
                 variant="body2"
                 sx={{
-                  color: "#7db0ff",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
@@ -486,7 +497,7 @@ const DrawerContent = ({
           <Button
             sx={{
               textTransform: "capitalize",
-              backgroundColor: "red",
+              backgroundColor: "#d45e6a",
               color: "white",
               borderRadius: "0.5rem",
               px: 2,
@@ -583,14 +594,14 @@ const NestedItem = React.memo(
 
           sx={{
             fontSize: "0.8rem",
-            paddingY: "0.8rem",
+            paddingY: "0.57rem",
+            marginY: "0.4rem",
             alignItems: "center",
             justifyContent: "flex-start",
-            width: "100%",
+            width: "230px",
             backgroundColor: isMainItemActive ? "#72a4ffff" : "transparent",
             borderLeft: isMainItemActive ? "4px solid #315fb6" : "none",
             borderRadius: "4px",
-            marginY: "0.5rem",
             color: "#fff",
             "&:hover": {
               backgroundColor: isMainItemActive ? "#315fb6" : "rgba(49, 95, 182, 0.1)",
@@ -616,6 +627,9 @@ const NestedItem = React.memo(
             sx={{
               textTransform: "capitalize",
               color: item.disabled ? "grey" : "#fff",
+              whiteSpace: "pre-line",
+              wordBreak: "break-word",
+              textAlign: "left",
             }}
           >
             {item.title}
@@ -629,7 +643,22 @@ const NestedItem = React.memo(
           />
         </Button>
         <Collapse in={open} unmountOnExit>
-          <List>
+          <List
+            sx={{
+              position: "relative",
+              marginLeft: "1.2rem",
+              paddingLeft: "0.4rem",
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: "1px",
+                backgroundColor: "rgba(255, 255, 255, 0.4)",
+              },
+            }}
+          >
             {item.nestedItems.map((nestedItem, index) => {
               if (nestedItem?.accessKey && !userPermissionObject[`${nestedItem?.accessKey}`])
                 return null;
@@ -653,7 +682,7 @@ const NestedItem = React.memo(
                 <ListItem
                   key={nestedItem.accessKey || nestedItem.href || index}
                   disableGutters
-                  sx={{ paddingY: "3px", marginLeft: "0.5rem" }}
+                  sx={{ paddingY: "1px", marginLeft: "0.5rem" }}
                 >
                   <LinkButton
                     to={nestedItem.href}
@@ -701,7 +730,7 @@ export const LinkButton = React.memo(
             paddingY: "0.8rem",
             alignItems: "center",
             justifyContent: "flex-start",
-            width: "100%",
+            width: "180px",
             backgroundColor: isMatch ? "#72a4ffff" : "transparent",
             borderLeft: isMatch ? "4px solid #315fb6" : "none",
             borderRadius: "4px",

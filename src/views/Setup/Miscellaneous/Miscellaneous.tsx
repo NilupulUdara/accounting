@@ -19,38 +19,38 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router";
 import DashboardCard from "../../../components/DashboardCard";
 
-function SetupInquiriesAndReports() {
+function Miscellaneous() {
   const navigate = useNavigate();
 
 const allItems = [
   { 
     text: "PAYMENT TERMS", 
     change: +10, icon: <RequestQuoteIcon sx={{ fontSize: 40, color: "#1976d2" }} />, 
-    path: "/setup/inquiriesandreports/payment-terms" 
+    path: "/setup/miscellaneous/payment-terms" 
   },
   { 
     text: "SHIPPING COMPANY", 
     change: -5, 
     icon: <ShoppingCartIcon sx={{ fontSize: 40, color: "#1976d2" }} />, 
-    path: "/setup/inquiriesandreports/shipping-company" 
+    path: "/setup/miscellaneous/shipping-company" 
   },
   { 
     text: "POINT OF SALE", 
     change: +8, 
     icon: <ReceiptLongIcon sx={{ fontSize: 40, color: "#1976d2" }} />, 
-    path: "/setup/inquiriesandreports/point-of-sale" 
+    path: "/setup/miscellaneous/point-of-sale" 
   },
   { 
     text: "PRINTERS", 
     change: 0, 
     icon: <AssignmentIcon sx={{ fontSize: 40, color: "#1976d2" }} />, 
-    path: "/setup/inquiriesandreports/printers" 
+    path: "/setup/miscellaneous/printers" 
   },
   { 
     text: "CONTACT CATEGORIES", 
     change: +12, 
     icon: <AssessmentIcon sx={{ fontSize: 40, color: "#1976d2" }} />, 
-    path: "/setup/inquiriesandreports/contact-categories" 
+    path: "/setup/miscellaneous/contact-categories" 
   },
 ];
 
@@ -81,4 +81,4 @@ return (
   );
 }
 
-export default SetupInquiriesAndReports;
+export default Miscellaneous;

@@ -41,7 +41,7 @@ export interface SidebarItem {
       accessKey?: string;
       title: string;
       href: string;
-      icon: JSX.Element;
+      icon?: JSX.Element;
       disabled?: boolean;
     }[];
   }[];
@@ -50,6 +50,25 @@ export interface SidebarItem {
 export const sidebarItems: Array<SidebarItem> = [
 
   {
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: <DashboardIcon fontSize="small" />,
+    nestedItems: [
+      {
+        title: "Transactions",
+        href: "/dashbord/transactions",
+      },
+      {
+        title: "Inquiries and Reports",
+        href: "/dashbord/inquiriesandreports",
+      },
+      {
+        title: "Maintenance",
+        href: "/dashbord/maintenance",
+      },
+    ],
+  },
+  {
     title: "Sales",
     href: "/sales",
     icon: <DashboardIcon fontSize="small" />,
@@ -57,17 +76,14 @@ export const sidebarItems: Array<SidebarItem> = [
       {
         title: "Transactions",
         href: "/sales/transactions",
-        icon: <LayersIcon fontSize="small" />,
       },
       {
         title: "Inquiries and Reports",
         href: "/sales/inquiriesandreports",
-        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
         title: "Maintenance",
         href: "/sales/maintenance",
-        icon: <ConstructionIcon fontSize="small" />,
       },
     ],
   },
@@ -79,17 +95,14 @@ export const sidebarItems: Array<SidebarItem> = [
       {
         title: "Transactions",
         href: "/purchase/transactions",
-        icon: <LayersIcon fontSize="small" />,
       },
       {
         title: "Inquiries and Reports",
         href: "/purchase/inquiriesandreports",
-        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
         title: "Maintenance",
         href: "/purchase/maintenance",
-        icon: <ConstructionIcon fontSize="small" />,
       },
     ],
   },
@@ -101,22 +114,18 @@ export const sidebarItems: Array<SidebarItem> = [
       {
         title: "Transactions",
         href: "/itemsandinventory/transactions",
-        icon: <LayersIcon fontSize="small" />,
       },
       {
         title: "Inquiries and Reports",
         href: "/itemsandinventory/inquiriesandreports",
-        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
         title: "Maintenance",
         href: "/itemsandinventory/maintenance",
-        icon: <ConstructionIcon fontSize="small" />,
       },
       {
         title: "Pricing and Costs",
         href: "/itemsandinventory/pricingandcosts",
-        icon: <ConstructionIcon fontSize="small" />,
       },
     ],
   },
@@ -128,17 +137,14 @@ export const sidebarItems: Array<SidebarItem> = [
       {
         title: "Transactions",
         href: "/manufacturing/transactions",
-        icon: <LayersIcon fontSize="small" />,
       },
       {
         title: "Inquiries and Reports",
         href: "/manufacturing/inquiriesandreports",
-        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
         title: "Maintenance",
         href: "/manufacturing/maintenance",
-        icon: <ConstructionIcon fontSize="small" />,
       },
     ],
   },
@@ -150,17 +156,14 @@ export const sidebarItems: Array<SidebarItem> = [
       {
         title: "Transactions",
         href: "/fixedassets/transactions",
-        icon: <LayersIcon fontSize="small" />,
       },
       {
         title: "Inquiries and Reports",
         href: "/fixedassets/inquiriesandreports",
-        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
         title: "Maintenance",
         href: "/fixedassets/maintenance",
-        icon: <ConstructionIcon fontSize="small" />,
       },
     ],
   },
@@ -172,17 +175,14 @@ export const sidebarItems: Array<SidebarItem> = [
       {
         title: "Transactions",
         href: "/dimension/transactions",
-        icon: <LayersIcon fontSize="small" />,
       },
       {
         title: "Inquiries and Reports",
         href: "/dimension/inquiriesandreports",
-        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
         title: "Maintenance",
         href: "/dimension/maintenance",
-        icon: <ConstructionIcon fontSize="small" />,
       },
     ],
   },
@@ -194,17 +194,14 @@ export const sidebarItems: Array<SidebarItem> = [
       {
         title: "Transactions",
         href: "/bankingandgeneralledger/transactions",
-        icon: <LayersIcon fontSize="small" />,
       },
       {
         title: "Inquiries and Reports",
         href: "/bankingandgeneralledger/inquiriesandreports",
-        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
         title: "Maintenance",
         href: "/bankingandgeneralledger/maintenance",
-        icon: <ConstructionIcon fontSize="small" />,
       },
     ],
   },
@@ -214,22 +211,17 @@ export const sidebarItems: Array<SidebarItem> = [
     icon: <SettingsOutlinedIcon fontSize="small" />,
     nestedItems: [
       {
-        title: "Transactions",
-        href: "/setup/transactions",
-        icon: <LayersIcon fontSize="small" />,
+        title: "Company Setup",
+        href: "/setup/companysetup",
       },
       {
         title: "Miscellaneous",
         href: "/setup/miscellaneous",
-        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
         title: "Maintenance",
         href: "/setup/maintenance",
-        icon: <ConstructionIcon fontSize="small" />,
       },
     ],
   },
-
-
 ];

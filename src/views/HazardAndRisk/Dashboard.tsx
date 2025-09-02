@@ -60,10 +60,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import CircularProgressWithLabel from "../../components/CircularProgress";
 
-const breadcrumbItems = [
-  { title: "Home", href: "/home" },
-  { title: "Hazard & Risk Management" },
-];
+<Breadcrumb breadcrumbs={breadcrumbItems} />
 
 function HazardAndRiskDashboard() {
   const { isMobile, isTablet } = useIsMobile();

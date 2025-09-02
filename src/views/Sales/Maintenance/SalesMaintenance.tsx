@@ -43,9 +43,6 @@ function SalesMaintenance() {
 
   return (
       <Stack sx={{ minHeight: "100vh", backgroundColor: "#f0f0f0", p: 3 }}>
-        <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3, color: "#333" }}>
-          Maintenance
-        </Typography>
   
         <Grid container spacing={2}>
           {allItems.map((item, index) => (

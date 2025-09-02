@@ -8,8 +8,6 @@ import PermissionDenied from "./components/PermissionDenied";
 import { useQuery } from "@tanstack/react-query";
 import { User, validateUser } from "./api/userApi";
 import { AuditCalendar } from "./views/AuditAndInspection/Calendar/Calendar";
-import Transactions from "./views/Sales/Transactions/SalesTransactions";
-import InquiruesAndReports from "./views/Sales/InquiriesAndReports/SalesInquiriesAndReports";
 import Maintenance from "./views/Sales/Maintenance/SalesMaintenance";
 import InquiriesAndReports from "./views/Sales/InquiriesAndReports/SalesInquiriesAndReports";
 import SalesQuotationEntry from "./views/Sales/Transactions/SalesQuotationEntry";
@@ -32,8 +30,9 @@ import BankingTransactions from "./views/BankindAndGeneralLedger/Transactions/Ba
 import BankingInquiriesAndReports from "./views/BankindAndGeneralLedger/InquiriesAndReports/BankingInquiriesAndReports";
 import BankingMaintenance from "./views/BankindAndGeneralLedger/Maintenance/BankingMaintenance";
 import SetupMaintenance from "./views/Setup/Maintenance/SetupMaintenance";
-import SetupInquiriesAndReports from "./views/Setup/InquiriesAndReports/SetupInquiriesAndReports";
-import SetupTransactions from "./views/Setup/Transactions/SetupTransactions";
+import Dashboard from "./views/Dashboard/Dashboard";
+import CompanySetup from "./views/Setup/CompanySetup/CompanySetup";
+import Miscellaneous from "./views/Setup/Miscellaneous/Miscellaneous";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -888,16 +887,21 @@ const AppRoutes = () => {
       />
 
       <Route
-        path="/setup/transactions"
-        element={withLayout(MainLayout, SetupTransactions)}
+        path="/setup/companysetup"
+        element={withLayout(MainLayout, CompanySetup)}
       />
       <Route
         path="/setup/miscellaneous"
-        element={withLayout(MainLayout, SetupInquiriesAndReports)}
+        element={withLayout(MainLayout, Miscellaneous)}
       />
       <Route
         path="/setup/maintenance"
         element={withLayout(MainLayout, SetupMaintenance)}
+      />
+
+      <Route
+        path="/dashboard"
+        element={withLayout(MainLayout, Dashboard)}
       />
 
     </Routes>

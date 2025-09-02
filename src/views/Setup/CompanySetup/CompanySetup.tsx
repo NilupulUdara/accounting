@@ -22,7 +22,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router";
 import DashboardCard from "../../../components/DashboardCard";
 
-function SetupTransactions() {
+function CompanySetup() {
   const navigate = useNavigate();
 
   const allItems = [
@@ -30,67 +30,67 @@ function SetupTransactions() {
       text: "COMPANY SETUP",
       change: +36,
       icon: <RequestQuoteIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/company-setup",
+      path: "/setup/companysetup/company-setup",
     },
     {
       text: "USER ACCOUNT SETUP",
       change: -14,
       icon: <ShoppingCartIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/user-account-setup",
+      path: "/setup/companysetup/user-account-setup",
     },
     {
       text: "ACCESS SETUP",
       change: +36,
       icon: <LocalShippingIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/access-setup",
+      path: "/setup/companysetup/access-setup",
     },
     {
       text: "DISPLAY SETUP",
       change: +36,
       icon: <ReceiptIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/display-setup",
+      path: "/setup/companysetup/display-setup",
     },
     {
       text: "TRANSACTION REFERENCES",
       change: -14,
       icon: <AssignmentTurnedInIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/transaction-references",
+      path: "/setup/companysetup/transaction-references",
     },
     {
       text: "TAXES",
       change: +36,
       icon: <PaymentIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/taxes",
+      path: "/setup/companysetup/taxes",
     },
     {
       text: "TAX GROUPS",
       change: +36,
       icon: <NoteAddIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/tax-groups",
+      path: "/setup/companysetup/tax-groups",
     },
     {
       text: "ITEM TAX TYPES",
       change: +36,
       icon: <PaymentIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/item-tax-types",
+      path: "/setup/companysetup/item-tax-types",
     },
     {
       text: "SYSTEM AND GENERAL GL SETUP",
       change: +36,
       icon: <PaymentIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/system-and-general-gl-setup",
+      path: "/setup/companysetup/system-and-general-gl-setup",
     },
     {
       text: "FISCAL YEARS",
       change: +36,
       icon: <NoteAddIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/fiscal-years",
+      path: "/setup/companysetup/fiscal-years",
     },
     {
       text: "PRINT PROFILES",
       change: +36,
       icon: <NoteAddIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
-      path: "/setup/transactions/print-profiles",
+      path: "/setup/companysetup/print-profiles",
     },
   ];
 
@@ -121,4 +121,4 @@ function SetupTransactions() {
   );
 }
 
-export default SetupTransactions;
+export default CompanySetup;
