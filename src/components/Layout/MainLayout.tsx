@@ -413,7 +413,7 @@ const DrawerContent = ({
             <ListItem
               key={item.accessKey || item.href || index}
               disableGutters
-              sx={{ paddingY: "20px", marginLeft: "1rem" }}
+              sx={{ paddingY: "1px", marginLeft: "1rem" }}
             >
               <LinkButton
                 to={item.href}
@@ -436,11 +436,24 @@ const DrawerContent = ({
           }}
         >
 
+          <Typography
+            variant="subtitle2"
+            sx={{
+              fontWeight: 600,
+              color: "#b0b8c4",
+              mb: 1,
+              fontSize: "0.75rem",
+              letterSpacing: "0.05rem",
+            }}
+          >
+            Profile
+          </Typography>
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               mb: 2,
+
             }}
           >
             <ProfileImage
@@ -449,7 +462,7 @@ const DrawerContent = ({
               size="3rem"
             />
 
-            <Box sx={{ ml: 2 }}>
+            <Box sx={{ ml: 2, flex: 1, minWidth: 0 }}>
               <Typography
                 variant="subtitle1"
                 sx={{ fontWeight: 600, color: "#fff" }}
@@ -458,7 +471,12 @@ const DrawerContent = ({
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ color: "#7db0ff" }}
+                sx={{
+                  color: "#7db0ff",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
               >
                 {user?.email}
               </Typography>
@@ -534,7 +552,6 @@ const NestedItem = React.memo(
     const { pathname } = useLocation();
     const { isTablet } = useIsMobile();
 
-    // Check if this main item is active based on state
     const isMainItemActive = activeMainItem === (item.href || item.title);
 
     const isAllItemsHidden = useMemo(() => {
@@ -557,23 +574,23 @@ const NestedItem = React.memo(
         <Button
           onClick={() => {
             setOpen((o) => !o);
-            setActiveMainItem(item.href || item.title); // Set this item as active
+            setActiveMainItem(item.href || item.title);
             if (item.href && isTablet) {
               navigate(item.href);
               handleDrawerClose();
             }
           }}
-          endIcon={open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+
           sx={{
             fontSize: "0.8rem",
-            paddingY: "0.2rem",
+            paddingY: "0.8rem",
             alignItems: "center",
             justifyContent: "flex-start",
             width: "100%",
             backgroundColor: isMainItemActive ? "#72a4ffff" : "transparent",
             borderLeft: isMainItemActive ? "4px solid #315fb6" : "none",
             borderRadius: "4px",
-            marginY: "0.1rem",
+            marginY: "0.5rem",
             color: "#fff",
             "&:hover": {
               backgroundColor: isMainItemActive ? "#315fb6" : "rgba(49, 95, 182, 0.1)",
@@ -603,6 +620,13 @@ const NestedItem = React.memo(
           >
             {item.title}
           </Typography>
+          <ChevronRightIcon
+            sx={{
+              transform: open ? "rotate(-90deg)" : "rotate(0deg)",
+              transition: "transform 0.2s ease",
+              marginLeft: "auto",
+            }}
+          />
         </Button>
         <Collapse in={open} unmountOnExit>
           <List>
@@ -674,7 +698,7 @@ export const LinkButton = React.memo(
         <Button
           sx={{
             fontSize: "0.8rem",
-            paddingY: "0.2rem",
+            paddingY: "0.8rem",
             alignItems: "center",
             justifyContent: "flex-start",
             width: "100%",

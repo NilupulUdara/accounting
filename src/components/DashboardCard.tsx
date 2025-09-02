@@ -1,97 +1,74 @@
-import { Box, Typography } from "@mui/material";
-import { ReactNode } from "react";
+import React from "react";
+import { Paper, Typography, Box } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-function DashboardCard({
-  title,
-  titleIcon,
-  caption,
-  value,
-  subDescription,
-}: {
-  title?: string;
-  titleIcon?: ReactNode;
-  caption?: string;
-  value?: string | number;
-  subDescription?: string;
-}) {
+interface DashboardCardProps {
+  text: string;
+  icon: JSX.Element;
+  change?: number; // optional
+  onClick?: () => void;
+}
+
+export default function DashboardCard({ text, icon, change, onClick }: DashboardCardProps) {
   return (
-    <Box
+    <Paper
       sx={{
+        p: 2,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
         backgroundColor: "#fff",
-        width: "100%",
-        padding: "1rem",
-        boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-        borderRadius: "0.3rem",
-        border: "1px solid var(--pallet-border-blue)", // Added border
+        borderRadius: 3,
+        mb: 2,
+        mx: 6,
+        height: 150,
+        boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+        transition: "0.3s",
+        "&:hover": {
+          transform: "translateY(-3px)",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          cursor: "pointer",
+        },
       }}
+      onClick={onClick}
     >
+      {/* Left Side: Title + Optional Change */}
       <Box>
+        <Typography
+          variant="subtitle1"
+          fontWeight="bold"
+          color="text.primary"
+          sx={{ mb: change !== undefined ? 1 : 0 }}
+        >
+          {text}
+        </Typography>
+        {change !== undefined && (
+          <Typography variant="body2" color="text.secondary">
+            compared last…{" "}
+            <span style={{ fontWeight: "bold", color: change >= 0 ? "green" : "red" }}>
+              {change >= 0 ? `+${change}% ↑` : `${change}% ↓`}
+            </span>
+          </Typography>
+        )}
+      </Box>
+
+      {/* Right Side: Icon + Arrow */}
+      <Box display="flex" alignItems="center" gap={1}>
         <Box
           sx={{
             display: "flex",
-            alignItems: "flex-start",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "50%",
+            backgroundColor: "#1976d2", 
+            width: 50, 
+            height: 50,
           }}
         >
-          <Box
-            sx={{
-              marginRight: "0.4rem",
-              display: "flex",
-              alignItems: "center",
-              marginTop: "0.1rem",
-            }}
-          >
-            {titleIcon}
-          </Box>
-          {title && (
-            <Box>
-              <Typography
-                variant="subtitle2"
-                sx={{
-                  color: "var(--pallet-text-primary)",
-                }}
-              >
-                {title}
-              </Typography>
-            </Box>
-          )}
+          {React.cloneElement(icon, { sx: { color: "#000" } })}
         </Box>
-
-        {caption && (
-          <Typography
-            variant="caption"
-            sx={{ color: "var(--pallet-text-secondary)" }}
-          >
-            {caption}
-          </Typography>
-        )}
+        <ArrowForwardIosIcon fontSize="large" sx={{ color: "gray" }} />
       </Box>
-      <Box>
-        {value && (
-          <Typography
-            variant="h5"
-            sx={{
-              color: "var(--pallet-blue)",
-              marginX: "0.2rem",
-              marginY: "0.4rem",
-              fontWeight: 600,
-            }}
-          >
-            {value}
-          </Typography>
-        )}
-      </Box>
-      <Box sx={{ marginX: "0.2rem" }}>
-        {subDescription && (
-          <Typography
-            variant="caption"
-            sx={{ color: "var(--pallet-text-secondary)" }}
-          >
-            {subDescription}
-          </Typography>
-        )}
-      </Box>
-    </Box>
+    </Paper>
   );
 }
-
-export default DashboardCard;

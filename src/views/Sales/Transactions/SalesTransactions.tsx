@@ -20,8 +20,9 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router";
+import DashboardCard from "../../../components/DashboardCard";
 
-function Transactions() {
+function SalesTransactions() {
   const navigate = useNavigate();
 
   const allItems = [
@@ -113,74 +114,21 @@ function Transactions() {
     }
   };
 
-  const renderCard = (item, index) => (
-    <Paper
-      key={index}
-      sx={{
-        p: 2,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        backgroundColor: "#fff",
-        borderRadius: 3,
-        mb: 4,
-        mx: 6,
-        height: 120,
-        boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-        transition: "0.3s",
-        "&:hover": {
-          transform: "translateY(-3px)",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-          cursor: "pointer",
-        },
-      }}
-      onClick={() => handleItemClick(item.path, item.text)}
-    >
-      <Box display="flex" alignItems="center" gap={2}>
-
-        <Box>
-          <Typography variant="subtitle1" fontWeight="bold" color="text.primary" sx={{ mb: 1 }}>
-            {item.text}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            compared last…{" "}
-            <span style={{ fontWeight: "bold", color: item.change >= 0 ? "green" : "red" }}>
-              {item.change >= 0 ? `+${item.change}% ↑` : `${item.change}% ↓`}
-            </span>
-          </Typography>
-        </Box>
-      </Box>
-
-      <Box display="flex" alignItems="center" gap={1}>
-        {item.icon}
-        <ArrowForwardIosIcon fontSize="large" sx={{ color: "gray" }} />
-      </Box>
-    </Paper>
-  );
-
   return (
-    <Stack
-      sx={{
-        minHeight: "100vh",
-        backgroundColor: "#f9f9f9",
-        p: 3,
-      }}
-    >
-      <Typography
-        variant="h5"
-        sx={{
-          fontWeight: "bold",
-          mb: 3,
-          color: "#333",
-        }}
-      >
+    <Stack sx={{ minHeight: "100vh", backgroundColor: "#f9f9f9", p: 3 }}>
+      <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3, color: "#333" }}>
         Transactions
       </Typography>
 
       <Grid container spacing={2}>
         {allItems.map((item, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            {renderCard(item, index)}
+            <DashboardCard
+              text={item.text}
+              icon={item.icon}
+              change={item.change}
+              onClick={() => handleItemClick(item.path, item.text)}
+            />
           </Grid>
         ))}
       </Grid>
@@ -188,4 +136,4 @@ function Transactions() {
   );
 }
 
-export default Transactions;
+export default SalesTransactions;

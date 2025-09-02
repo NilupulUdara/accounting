@@ -8,11 +8,32 @@ import PermissionDenied from "./components/PermissionDenied";
 import { useQuery } from "@tanstack/react-query";
 import { User, validateUser } from "./api/userApi";
 import { AuditCalendar } from "./views/AuditAndInspection/Calendar/Calendar";
-import Transactions from "./views/Sales/Transactions/Transactions";
-import InquiruesAndReports from "./views/Sales/InquiriesAndReports/InquiriesAndReports";
-import Maintenance from "./views/Sales/Maintenance/Maintenance";
-import InquiriesAndReports from "./views/Sales/InquiriesAndReports/InquiriesAndReports";
+import Transactions from "./views/Sales/Transactions/SalesTransactions";
+import InquiruesAndReports from "./views/Sales/InquiriesAndReports/SalesInquiriesAndReports";
+import Maintenance from "./views/Sales/Maintenance/SalesMaintenance";
+import InquiriesAndReports from "./views/Sales/InquiriesAndReports/SalesInquiriesAndReports";
 import SalesQuotationEntry from "./views/Sales/Transactions/SalesQuotationEntry";
+import SalesTransactions from "./views/Sales/Transactions/SalesTransactions";
+import PurchaseTransactions from "./views/Purchases/Transactions/PurchaseTransactions";
+import PurchaseInquiriesAndReports from "./views/Purchases/InquiriesAndReports/PurchaseInquiriesAndReports";
+import PurchaseMaintenance from "./views/Purchases/Maintenance/PurchaseMaintenance";
+import ItemsTransactions from "./views/ItemsAndInventory/Transactions/ItemsTransactions";
+import ItemsInquiriesAndReports from "./views/ItemsAndInventory/InquiriesAndReports/ItemsInquiriesAndReports";
+import ItemsMaintenance from "./views/ItemsAndInventory/Maintenance/ItemsMaintenance";
+import ItemsPricingAndCosts from "./views/ItemsAndInventory/PricingAndCosts/PricingAndCosts";
+import ManufacturingTransactions from "./views/Manufacturing/Transactions/ManufacturingTransactions";
+import ManufacturingInquiriesAndReports from "./views/Manufacturing/InquiriesAndReports/ManufacturingInquiriesAndReports";
+import ManufacturingMaintenance from "./views/Manufacturing/Maintenance/ManufacturingMaintenance";
+import FixedAssestsTransactions from "./views/FixedAssets/Transactions/FixedAssestsTransactions";
+import DimensionTransactions from "./views/Dimensions/Transactions/DimensionTransactions";
+import DimensionInquiriesAndReports from "./views/Dimensions/InquiriesAndReports/DimensionInquiriesAndReports";
+import DimensionMaintenance from "./views/Dimensions/Maintenance/DimensionMaintenance";
+import BankingTransactions from "./views/BankindAndGeneralLedger/Transactions/BankingTransactions";
+import BankingInquiriesAndReports from "./views/BankindAndGeneralLedger/InquiriesAndReports/BankingInquiriesAndReports";
+import BankingMaintenance from "./views/BankindAndGeneralLedger/Maintenance/BankingMaintenance";
+import SetupMaintenance from "./views/Setup/Maintenance/SetupMaintenance";
+import SetupInquiriesAndReports from "./views/Setup/InquiriesAndReports/SetupInquiriesAndReports";
+import SetupTransactions from "./views/Setup/Transactions/SetupTransactions";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -264,7 +285,7 @@ const AppRoutes = () => {
             !userPermissionObject?.[PermissionKeys.ADMIN_ACCESS_MNG_VIEW]
           )}
         />
-        
+
         {/* Audit & Inspection */}
         <Route
           path="/input-fields/autocomplete"
@@ -272,7 +293,7 @@ const AppRoutes = () => {
             MainLayout,
             Autocomplete,
             !userPermissionObject?.[
-              PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
+            PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
             ]
           )}
         />
@@ -282,7 +303,7 @@ const AppRoutes = () => {
             MainLayout,
             TextField,
             !userPermissionObject?.[
-              PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
+            PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
             ]
           )}
         />
@@ -292,7 +313,7 @@ const AppRoutes = () => {
             MainLayout,
             DatePickers,
             !userPermissionObject?.[
-              PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
+            PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
             ]
           )}
         />
@@ -302,7 +323,7 @@ const AppRoutes = () => {
             MainLayout,
             OtherInputs,
             !userPermissionObject?.[
-              PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
+            PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
             ]
           )}
         />
@@ -312,7 +333,7 @@ const AppRoutes = () => {
             MainLayout,
             AccordianAndDividers,
             !userPermissionObject?.[
-              PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
+            PermissionKeys.AUDIT_INSPECTION_DASHBOARD_VIEW
             ]
           )}
         />
@@ -332,7 +353,7 @@ const AppRoutes = () => {
             MainLayout,
             AuditBuilderTable,
             !userPermissionObject?.[
-              PermissionKeys.AUDIT_INSPECTION_INTERNAL_AUDIT_FORM_BUILDER_VIEW
+            PermissionKeys.AUDIT_INSPECTION_INTERNAL_AUDIT_FORM_BUILDER_VIEW
             ]
           )}
         />
@@ -342,7 +363,7 @@ const AppRoutes = () => {
             MainLayout,
             InternalAuditTable,
             !userPermissionObject?.[
-              PermissionKeys.AUDIT_INSPECTION_INTERNAL_AUDIT_REGISTER_VIEW
+            PermissionKeys.AUDIT_INSPECTION_INTERNAL_AUDIT_REGISTER_VIEW
             ]
           )}
         />
@@ -367,7 +388,7 @@ const AppRoutes = () => {
             MainLayout,
             ChemicalDashboard,
             !userPermissionObject?.[
-              PermissionKeys.CHEMICAL_MNG_DASHBOARD_VIEW
+            PermissionKeys.CHEMICAL_MNG_DASHBOARD_VIEW
             ]
           )}
         />
@@ -427,7 +448,7 @@ const AppRoutes = () => {
               <HazardRiskTable isAssignedTasks={true} />
             ),
             !userPermissionObject?.[
-              PermissionKeys.HAZARD_RISK_ASSIGNED_TASKS_VIEW
+            PermissionKeys.HAZARD_RISK_ASSIGNED_TASKS_VIEW
             ]
           )}
         />
@@ -438,7 +459,7 @@ const AppRoutes = () => {
             MainLayout,
             AccidentAndIncidentDashboard,
             !userPermissionObject?.[
-              PermissionKeys.INCIDENT_ACCIDENT_DASHBOARD_VIEW
+            PermissionKeys.INCIDENT_ACCIDENT_DASHBOARD_VIEW
             ]
           )}
         />
@@ -450,7 +471,7 @@ const AppRoutes = () => {
               return <AccidentTable isAssignedTasks={false} />;
             },
             !userPermissionObject?.[
-              PermissionKeys.INCIDENT_ACCIDENT_REGISTER_ACCIDENT_VIEW
+            PermissionKeys.INCIDENT_ACCIDENT_REGISTER_ACCIDENT_VIEW
             ]
           )}
         />
@@ -462,7 +483,7 @@ const AppRoutes = () => {
               return <IncidentTable isAssignedTasks={false} />;
             },
             !userPermissionObject?.[
-              PermissionKeys.INCIDENT_ACCIDENT_REGISTER_INCIDENT_VIEW
+            PermissionKeys.INCIDENT_ACCIDENT_REGISTER_INCIDENT_VIEW
             ]
           )}
         />
@@ -487,7 +508,7 @@ const AppRoutes = () => {
               return <AccidentTable isAssignedTasks={true} />;
             },
             !userPermissionObject?.[
-              PermissionKeys.INCIDENT_ACCIDENT_ASSIGNED_TASKS_ACCIDENT_VIEW
+            PermissionKeys.INCIDENT_ACCIDENT_ASSIGNED_TASKS_ACCIDENT_VIEW
             ]
           )}
         />
@@ -499,7 +520,7 @@ const AppRoutes = () => {
               return <IncidentTable isAssignedTasks={true} />;
             },
             !userPermissionObject?.[
-              PermissionKeys.INCIDENT_ACCIDENT_ASSIGNED_TASKS_INCIDENT_VIEW
+            PermissionKeys.INCIDENT_ACCIDENT_ASSIGNED_TASKS_INCIDENT_VIEW
             ]
           )}
         />
@@ -525,7 +546,7 @@ const AppRoutes = () => {
             MainLayout,
             OccupationalHealthDashboard,
             !userPermissionObject?.[
-              PermissionKeys.OCCUPATIONAL_HEALTH_DASHBOARD_VIEW
+            PermissionKeys.OCCUPATIONAL_HEALTH_DASHBOARD_VIEW
             ]
           )}
         />
@@ -536,8 +557,8 @@ const AppRoutes = () => {
             MainLayout,
             PatientTable,
             !userPermissionObject?.[
-              PermissionKeys
-                .OCCUPATIONAL_HEALTH_CLINICAL_SUITE_PATIENT_REGISTER_VIEW
+            PermissionKeys
+              .OCCUPATIONAL_HEALTH_CLINICAL_SUITE_PATIENT_REGISTER_VIEW
             ]
           )}
         />
@@ -560,8 +581,8 @@ const AppRoutes = () => {
             MainLayout,
             MedicineStockTable,
             !userPermissionObject?.[
-              PermissionKeys
-                .OCCUPATIONAL_HEALTH_CLINICAL_SUITE_MEDICINE_STOCK_VIEW
+            PermissionKeys
+              .OCCUPATIONAL_HEALTH_CLINICAL_SUITE_MEDICINE_STOCK_VIEW
             ]
           )}
         />
@@ -587,8 +608,8 @@ const AppRoutes = () => {
               <MedicineRequestTable isAssignedTasks={false} />
             ),
             !userPermissionObject?.[
-              PermissionKeys
-                .OCCUPATIONAL_HEALTH_MEDICINE_INVENTORY_MEDICINE_REQUEST_VIEW
+            PermissionKeys
+              .OCCUPATIONAL_HEALTH_MEDICINE_INVENTORY_MEDICINE_REQUEST_VIEW
             ]
           )}
         />
@@ -598,8 +619,8 @@ const AppRoutes = () => {
             MainLayout,
             PurchaseAndInventoryTable,
             !userPermissionObject?.[
-              PermissionKeys
-                .OCCUPATIONAL_HEALTH_MEDICINE_INVENTORY_PURCHASE_INVENTORY_VIEW
+            PermissionKeys
+              .OCCUPATIONAL_HEALTH_MEDICINE_INVENTORY_PURCHASE_INVENTORY_VIEW
             ]
           )}
         />
@@ -609,8 +630,8 @@ const AppRoutes = () => {
             MainLayout,
             PurchaseAndInventoryTransactionTable,
             !userPermissionObject?.[
-              PermissionKeys
-                .OCCUPATIONAL_HEALTH_MEDICINE_INVENTORY_TRANSACTION_VIEW
+            PermissionKeys
+              .OCCUPATIONAL_HEALTH_MEDICINE_INVENTORY_TRANSACTION_VIEW
             ]
           )}
         />
@@ -622,8 +643,8 @@ const AppRoutes = () => {
               <MedicineRequestTable isAssignedTasks={true} />
             ),
             !userPermissionObject?.[
-              PermissionKeys
-                .OCCUPATIONAL_HEALTH_MEDICINE_INVENTORY_ASSIGNED_TASKS_VIEW
+            PermissionKeys
+              .OCCUPATIONAL_HEALTH_MEDICINE_INVENTORY_ASSIGNED_TASKS_VIEW
             ]
           )}
         />
@@ -634,8 +655,8 @@ const AppRoutes = () => {
             MainLayout,
             MaternityRegisterTable,
             !userPermissionObject?.[
-              PermissionKeys
-                .OCCUPATIONAL_HEALTH_MEDICAL_RECORDS_MATERNITY_REGISTER_VIEW
+            PermissionKeys
+              .OCCUPATIONAL_HEALTH_MEDICAL_RECORDS_MATERNITY_REGISTER_VIEW
             ]
           )}
         />
@@ -647,7 +668,7 @@ const AppRoutes = () => {
             MainLayout,
             ExternalAuditTable,
             !userPermissionObject?.[
-              PermissionKeys.AUDIT_INSPECTION_EXTERNAL_AUDIT_REGISTER_VIEW
+            PermissionKeys.AUDIT_INSPECTION_EXTERNAL_AUDIT_REGISTER_VIEW
             ]
           )}
         />
@@ -657,7 +678,7 @@ const AppRoutes = () => {
             MainLayout,
             SustainabilityTable,
             !userPermissionObject?.[
-              PermissionKeys.SUSTAINABILITY_SDG_REPORTING_CREATE
+            PermissionKeys.SUSTAINABILITY_SDG_REPORTING_CREATE
             ]
           )}
         />
@@ -675,7 +696,7 @@ const AppRoutes = () => {
             MainLayout,
             TargetSettingsTable,
             !userPermissionObject?.[
-              PermissionKeys.ENVIRONMENT_HISTORY_TARGET_SETTING_VIEW
+            PermissionKeys.ENVIRONMENT_HISTORY_TARGET_SETTING_VIEW
             ]
           )}
         />
@@ -687,7 +708,7 @@ const AppRoutes = () => {
               <TargetSettingsTable isAssignedTasks={true} />
             ),
             !userPermissionObject?.[
-              PermissionKeys.ENVIRONMENT_ASSIGNED_TASKS_TARGET_SETTING_VIEW
+            PermissionKeys.ENVIRONMENT_ASSIGNED_TASKS_TARGET_SETTING_VIEW
             ]
           )}
         />
@@ -697,7 +718,7 @@ const AppRoutes = () => {
             MainLayout,
             EnvironmentTable,
             !userPermissionObject?.[
-              PermissionKeys.ENVIRONMENT_HISTORY_CONSUMPTION_VIEW
+            PermissionKeys.ENVIRONMENT_HISTORY_CONSUMPTION_VIEW
             ]
           )}
         />
@@ -709,7 +730,7 @@ const AppRoutes = () => {
               <EnvironmentTable isAssignedTasks={true} />
             ),
             !userPermissionObject?.[
-              PermissionKeys.ENVIRONMENT_ASSIGNED_TASKS_CONSUMPTION_VIEW
+            PermissionKeys.ENVIRONMENT_ASSIGNED_TASKS_CONSUMPTION_VIEW
             ]
           )}
         />
@@ -743,7 +764,7 @@ const AppRoutes = () => {
             />
           ),
           !userPermissionObject?.[
-            PermissionKeys.AUDIT_INSPECTION_EXTERNAL_AUDIT_QUEUE_VIEW
+          PermissionKeys.AUDIT_INSPECTION_EXTERNAL_AUDIT_QUEUE_VIEW
           ]
         )}
       />
@@ -759,28 +780,126 @@ const AppRoutes = () => {
             />
           ),
           !userPermissionObject?.[
-            PermissionKeys
-              .AUDIT_INSPECTION_EXTERNAL_AUDIT_CORRECTIVE_ACTION_VIEW
+          PermissionKeys
+            .AUDIT_INSPECTION_EXTERNAL_AUDIT_CORRECTIVE_ACTION_VIEW
           ]
         )}
       />
 
       <Route
-          path="/sales/transactions"
-          element={withLayout(MainLayout, Transactions)}
-        />
-        <Route
-          path="/sales/transactions/sales-quotation-entry"
-          element={withLayout(MainLayout, SalesQuotationEntry)}
-        />
-        <Route
-          path="/sales/inquiriesandreports"
-          element={withLayout(MainLayout, InquiriesAndReports)}
-        />
-        <Route
-          path="/sales/maintenance"
-          element={withLayout(MainLayout, Maintenance)}
-        /> 
+        path="/sales/transactions"
+        element={withLayout(MainLayout, SalesTransactions)}
+      />
+      <Route
+        path="/sales/transactions/sales-quotation-entry"
+        element={withLayout(MainLayout, SalesQuotationEntry)}
+      />
+      <Route
+        path="/sales/inquiriesandreports"
+        element={withLayout(MainLayout, InquiriesAndReports)}
+      />
+      <Route
+        path="/sales/maintenance"
+        element={withLayout(MainLayout, Maintenance)}
+      />
+
+
+      <Route
+        path="/purchase/transactions"
+        element={withLayout(MainLayout, PurchaseTransactions)}
+      />
+      <Route
+        path="/purchase/inquiriesandreports"
+        element={withLayout(MainLayout, PurchaseInquiriesAndReports)}
+      />
+      <Route
+        path="/purchase/maintenance"
+        element={withLayout(MainLayout, PurchaseMaintenance)}
+      />
+
+      <Route
+        path="/itemsandinventory/transactions"
+        element={withLayout(MainLayout, ItemsTransactions)}
+      />
+      <Route
+        path="/itemsandinventory/inquiriesandreports"
+        element={withLayout(MainLayout, ItemsInquiriesAndReports)}
+      />
+      <Route
+        path="/itemsandinventory/maintenance"
+        element={withLayout(MainLayout, ItemsMaintenance)}
+      />
+      <Route
+        path="/itemsandinventory/pricingandcosts"
+        element={withLayout(MainLayout, ItemsPricingAndCosts)}
+      />
+
+      <Route
+        path="/manufacturing/transactions"
+        element={withLayout(MainLayout, ManufacturingTransactions)}
+      />
+      <Route
+        path="/manufacturing/inquiriesandreports"
+        element={withLayout(MainLayout, ManufacturingInquiriesAndReports)}
+      />
+      <Route
+        path="/manufacturing/maintenance"
+        element={withLayout(MainLayout, ManufacturingMaintenance)}
+      />
+
+
+      <Route
+        path="/fixedassets/transactions"
+        element={withLayout(MainLayout, FixedAssestsTransactions)}
+      />
+      <Route
+        path="/fixedassets/inquiriesandreports"
+        element={withLayout(MainLayout, FixedAssestsTransactions)}
+      />
+      <Route
+        path="/fixedassets/maintenance"
+        element={withLayout(MainLayout, DimensionTransactions)}
+      />
+
+      <Route
+        path="/dimension/transactions"
+        element={withLayout(MainLayout, DimensionTransactions)}
+      />
+      <Route
+        path="/dimension/inquiriesandreports"
+        element={withLayout(MainLayout, DimensionInquiriesAndReports)}
+      />
+      <Route
+        path="/dimension/maintenance"
+        element={withLayout(MainLayout, DimensionMaintenance)}
+      />
+
+      <Route
+        path="/bankingandgeneralledger/transactions"
+        element={withLayout(MainLayout, BankingTransactions)}
+      />
+      <Route
+        path="/bankingandgeneralledger/inquiriesandreports"
+        element={withLayout(MainLayout, BankingInquiriesAndReports)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance"
+        element={withLayout(MainLayout, BankingMaintenance)}
+      />
+
+      <Route
+        path="/setup/transactions"
+        element={withLayout(MainLayout, SetupTransactions)}
+      />
+      <Route
+        path="/setup/miscellaneous"
+        element={withLayout(MainLayout, SetupInquiriesAndReports)}
+      />
+      <Route
+        path="/setup/maintenance"
+        element={withLayout(MainLayout, SetupMaintenance)}
+      />
+
     </Routes>
   );
 };

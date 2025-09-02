@@ -48,63 +48,188 @@ export interface SidebarItem {
 }
 
 export const sidebarItems: Array<SidebarItem> = [
-  
+
+  {
+    title: "Sales",
+    href: "/sales",
+    icon: <DashboardIcon fontSize="small" />,
+    nestedItems: [
       {
-        title: "Sales",
-        href: "/sales",
-        icon: <DashboardIcon fontSize="small" />,
-        nestedItems: [
-          {
-            title: "Transactions",
-            href: "/sales/transactions",
-            icon: <LayersIcon fontSize="small" />,
-          },
-          {
-            title: "Inquiries and Reports",
-            href: "/sales/inquiriesandreports",
-            icon: <QueryStatsIcon fontSize="small" />,
-          },
-          {
-            title: "Maintenance",
-            href: "/sales/maintenance",
-            icon: <ConstructionIcon fontSize="small" />,
-          },
-        ],
+        title: "Transactions",
+        href: "/sales/transactions",
+        icon: <LayersIcon fontSize="small" />,
       },
       {
-        title: "Purchase",
-        href: "/purchase",
-        icon: <ForestIcon fontSize="small" />,
+        title: "Inquiries and Reports",
+        href: "/sales/inquiriesandreports",
+        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
-        title: "Item and inventory",
-        href: "/itemandinventory",
-        icon: <FolderIcon fontSize="small" />,
+        title: "Maintenance",
+        href: "/sales/maintenance",
+        icon: <ConstructionIcon fontSize="small" />,
+      },
+    ],
+  },
+  {
+    title: "Purchase",
+    href: "/purchase",
+    icon: <ForestIcon fontSize="small" />,
+    nestedItems: [
+      {
+        title: "Transactions",
+        href: "/purchase/transactions",
+        icon: <LayersIcon fontSize="small" />,
       },
       {
-        title: "Manufacturing",
-        href: "/manufacturing",
-        icon: <ScienceIcon fontSize="small" />,
+        title: "Inquiries and Reports",
+        href: "/purchase/inquiriesandreports",
+        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
-        title: "Fixed Assets",
-        href: "/fixedassets",
-        icon: <EmergencyIcon fontSize="small" />,
+        title: "Maintenance",
+        href: "/purchase/maintenance",
+        icon: <ConstructionIcon fontSize="small" />,
+      },
+    ],
+  },
+  {
+    title: "Item and inventory",
+    href: "/itemsandinventory",
+    icon: <FolderIcon fontSize="small" />,
+    nestedItems: [
+      {
+        title: "Transactions",
+        href: "/itemsandinventory/transactions",
+        icon: <LayersIcon fontSize="small" />,
       },
       {
-        title: "Dimension",
-        href: "/dimension",
-        icon: <ChangeHistoryIcon fontSize="small" />,
+        title: "Inquiries and Reports",
+        href: "/itemsandinventory/inquiriesandreports",
+        icon: <QueryStatsIcon fontSize="small" />,
       },
       {
-        title: "Banking And General ledger",
-        href: "/bankingandgeneralledger",
-        icon: <PeopleAltIcon fontSize="small" />,
+        title: "Maintenance",
+        href: "/itemsandinventory/maintenance",
+        icon: <ConstructionIcon fontSize="small" />,
       },
       {
-        title: "Setup",
-        href: "/setup",
-        icon: <SettingsOutlinedIcon fontSize="small" />,
+        title: "Pricing and Costs",
+        href: "/itemsandinventory/pricingandcosts",
+        icon: <ConstructionIcon fontSize="small" />,
       },
-    
+    ],
+  },
+  {
+    title: "Manufacturing",
+    href: "/manufacturing",
+    icon: <ScienceIcon fontSize="small" />,
+    nestedItems: [
+      {
+        title: "Transactions",
+        href: "/manufacturing/transactions",
+        icon: <LayersIcon fontSize="small" />,
+      },
+      {
+        title: "Inquiries and Reports",
+        href: "/manufacturing/inquiriesandreports",
+        icon: <QueryStatsIcon fontSize="small" />,
+      },
+      {
+        title: "Maintenance",
+        href: "/manufacturing/maintenance",
+        icon: <ConstructionIcon fontSize="small" />,
+      },
+    ],
+  },
+  {
+    title: "Fixed Assets",
+    href: "/fixedassets",
+    icon: <EmergencyIcon fontSize="small" />,
+    nestedItems: [
+      {
+        title: "Transactions",
+        href: "/fixedassets/transactions",
+        icon: <LayersIcon fontSize="small" />,
+      },
+      {
+        title: "Inquiries and Reports",
+        href: "/fixedassets/inquiriesandreports",
+        icon: <QueryStatsIcon fontSize="small" />,
+      },
+      {
+        title: "Maintenance",
+        href: "/fixedassets/maintenance",
+        icon: <ConstructionIcon fontSize="small" />,
+      },
+    ],
+  },
+  {
+    title: "Dimension",
+    href: "/dimension",
+    icon: <ChangeHistoryIcon fontSize="small" />,
+    nestedItems: [
+      {
+        title: "Transactions",
+        href: "/dimension/transactions",
+        icon: <LayersIcon fontSize="small" />,
+      },
+      {
+        title: "Inquiries and Reports",
+        href: "/dimension/inquiriesandreports",
+        icon: <QueryStatsIcon fontSize="small" />,
+      },
+      {
+        title: "Maintenance",
+        href: "/dimension/maintenance",
+        icon: <ConstructionIcon fontSize="small" />,
+      },
+    ],
+  },
+  {
+    title: "Banking And General ledger",
+    href: "/bankingandgeneralledger",
+    icon: <PeopleAltIcon fontSize="small" />,
+    nestedItems: [
+      {
+        title: "Transactions",
+        href: "/bankingandgeneralledger/transactions",
+        icon: <LayersIcon fontSize="small" />,
+      },
+      {
+        title: "Inquiries and Reports",
+        href: "/bankingandgeneralledger/inquiriesandreports",
+        icon: <QueryStatsIcon fontSize="small" />,
+      },
+      {
+        title: "Maintenance",
+        href: "/bankingandgeneralledger/maintenance",
+        icon: <ConstructionIcon fontSize="small" />,
+      },
+    ],
+  },
+  {
+    title: "Setup",
+    href: "/setup",
+    icon: <SettingsOutlinedIcon fontSize="small" />,
+    nestedItems: [
+      {
+        title: "Transactions",
+        href: "/setup/transactions",
+        icon: <LayersIcon fontSize="small" />,
+      },
+      {
+        title: "Miscellaneous",
+        href: "/setup/miscellaneous",
+        icon: <QueryStatsIcon fontSize="small" />,
+      },
+      {
+        title: "Maintenance",
+        href: "/setup/maintenance",
+        icon: <ConstructionIcon fontSize="small" />,
+      },
+    ],
+  },
+
+
 ];
