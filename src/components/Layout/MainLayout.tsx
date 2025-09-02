@@ -425,7 +425,7 @@ const DrawerContent = ({
             <ListItem
               key={item.accessKey || item.href || index}
               disableGutters
-              sx={{ paddingY: "1px", marginLeft: "1rem"}}
+              sx={{ paddingY: "1px", marginLeft: "1rem" }}
             >
               <LinkButton
                 to={item.href}
@@ -433,13 +433,13 @@ const DrawerContent = ({
                 title={item.title}
                 disabled={item.disabled}
                 handleDrawerClose={handleDrawerClose}
-                
+
               />
             </ListItem>
           );
         })}
 
-        <Divider sx={{ backgroundColor: "var(--pallet-grey)", marginTop: "1rem", width: "80%", mx:"auto" }} />
+        <Divider sx={{ backgroundColor: "var(--pallet-grey)", marginTop: "1rem", width: "80%", mx: "auto" }} />
 
         <Box
           sx={{
@@ -584,9 +584,10 @@ const NestedItem = React.memo(
       <React.Fragment key={item.accessKey || item.href}>
         <Button
           onClick={() => {
-            setOpen((o) => !o);
-            setActiveMainItem(item.href || item.title);
-            if (item.href && isTablet) {
+            if (item.nestedItems) {
+              setOpen((o) => !o);
+              setActiveMainItem(item.href || item.title);
+            } else if (item.href) {
               navigate(item.href);
               handleDrawerClose();
             }

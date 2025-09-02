@@ -67,7 +67,7 @@ function FixedAssestsTransactions() {
   };
 
   return (
-    <Stack sx={{ minHeight: "100vh", backgroundColor: "#f9f9f9", p: 3 }}>
+    <Stack sx={{ minHeight: "100vh", backgroundColor: "#f0f0f0", p: 3 }}>
 
       <Grid container spacing={2}>
         {allItems.map((item, index) => (

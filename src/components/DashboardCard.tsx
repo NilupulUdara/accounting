@@ -15,14 +15,14 @@ export default function DashboardCard({ text, icon, change, onClick }: Dashboard
       sx={{
         p: { xs: 2, sm: 3 },
         display: "flex",
-        alignItems: "center",
+        flexDirection: { xs: "column", sm: "row" }, // stack on mobile
+        alignItems: { xs: "flex-start", sm: "center" },
         justifyContent: "space-between",
-        flexWrap: "wrap", 
         backgroundColor: "#fff",
         borderRadius: 3,
         mb: 2,
-        mx: { xs: 2, sm: 3, md: 6 }, 
-        minHeight: { xs: "auto", sm: 150 }, 
+        mx: { xs: 2, sm: 3, md: 6 },
+        minHeight: { xs: "auto", sm: 150 },
         boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
         transition: "0.3s",
         "&:hover": {
@@ -34,7 +34,12 @@ export default function DashboardCard({ text, icon, change, onClick }: Dashboard
       onClick={onClick}
     >
       {/* Left Side: Title + Optional Change */}
-      <Box sx={{ flex: 1, minWidth: { xs: "100%", sm: "auto" } }}>
+      <Box
+        sx={{
+          flex: 1,
+          minWidth: 0, // prevent overflow
+        }}
+      >
         <Typography
           variant="subtitle1"
           fontWeight="bold"
@@ -44,9 +49,22 @@ export default function DashboardCard({ text, icon, change, onClick }: Dashboard
           {text}
         </Typography>
         {change !== undefined && (
-          <Typography variant="body2" color="text.secondary">
-            compared last…{" "}
-            <span style={{ fontWeight: "bold", color: change >= 0 ? "green" : "red",  marginLeft: "0.6rem", }}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 0.5,
+            }}
+          >
+            compared last…
+            <span
+              style={{
+                fontWeight: "bold",
+                color: change >= 0 ? "green" : "red",
+              }}
+            >
               {change >= 0 ? `+${change}% ↑` : `${change}% ↓`}
             </span>
           </Typography>
@@ -58,7 +76,12 @@ export default function DashboardCard({ text, icon, change, onClick }: Dashboard
         display="flex"
         alignItems="center"
         gap={1}
-        sx={{ mt: { xs: 2, sm: 0 }, minWidth: { xs: "100%", sm: "auto" }, justifyContent: { xs: "flex-start", sm: "flex-end" } }}
+        sx={{
+          mt: { xs: 2, sm: 0 },
+          width: { xs: "100%", sm: "auto" },
+          justifyContent: { xs: "flex-start", sm: "flex-end" },
+          flexShrink: 0, // prevent shrinking
+        }}
       >
         <Box
           sx={{
@@ -66,13 +89,18 @@ export default function DashboardCard({ text, icon, change, onClick }: Dashboard
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "50%",
-            width: { xs: 40, sm: 50 }, 
+            width: { xs: 40, sm: 50 },
             height: { xs: 40, sm: 50 },
           }}
         >
-          {React.cloneElement(icon, { sx: { color: "#000", fontSize: { xs: 20, sm: 24 } } })}
+          {React.cloneElement(icon, {
+            sx: { color: "#000", fontSize: { xs: 20, sm: 24 } },
+          })}
         </Box>
-        <ArrowForwardIosIcon fontSize="large" sx={{ color: "gray" }} />
+        <ArrowForwardIosIcon
+          fontSize="small"
+          sx={{ color: "gray", fontSize: { xs: 16, sm: 20 } }}
+        />
       </Box>
     </Paper>
   );
