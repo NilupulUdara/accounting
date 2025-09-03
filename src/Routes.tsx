@@ -36,14 +36,14 @@ import Miscellaneous from "./views/Setup/Miscellaneous/Miscellaneous";
 import FixedAssestsMaintenance from "./views/FixedAssets/Maintenance/FixedAssestsMaintenance";
 import FixedAssestsInquiriesAndReports from "./views/FixedAssets/InquiriesAndReports/FixedAssestsInquiriesAndReports";
 import CompanySetupForm from "./views/Setup/CompanySetup/CompanySetupForm";
-import AddUserForm from "./views/Setup/CompanySetup/AddUserForm";
-import UserManagementTable from "./views/Setup/CompanySetup/UserManagementTable";
-import FiscalYear from "./views/Setup/CompanySetup/FiscalYear";
-import FiscalYearTable from "./views/Setup/CompanySetup/FiscalYearTable";
-import TaxGroupsTable from "./views/Setup/CompanySetup/TaxGroupsTable";
-import TaxGroups from "./views/Setup/CompanySetup/TaxGroups";
-import TaxTypes from "./views/Setup/CompanySetup/TaxTypes";
-import TaxTypesTable from "./views/Setup/CompanySetup/TaxTypesTable";
+import AddUserForm from "./views/Setup/CompanySetup/User/AddUserForm";
+import UserManagementTable from "./views/Setup/CompanySetup/User/UserManagementTable";
+import FiscalYear from "./views/Setup/CompanySetup/FiscalYear/FiscalYear";
+import FiscalYearTable from "./views/Setup/CompanySetup/FiscalYear/FiscalYearTable";
+import TaxGroupsTable from "./views/Setup/CompanySetup/TaxGroups/TaxGroupsTable";
+import TaxGroups from "./views/Setup/CompanySetup/TaxGroups/TaxGroups";
+import TaxTypes from "./views/Setup/CompanySetup/TaxTypes/TaxTypes";
+import TaxTypesTable from "./views/Setup/CompanySetup/TaxTypes/TaxTypesTable";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -907,35 +907,35 @@ const AppRoutes = () => {
       />
       <Route
         path="/setup/companysetup/user-account-setup"
-        element={withLayout(MainLayout, AddUserForm)}
-      />
-      <Route
-        path="/setup/companysetup/user-management-table"
         element={withLayout(MainLayout, UserManagementTable)}
       />
       <Route
-        path="/setup/companysetup/fiscal-years"
-        element={withLayout(MainLayout, FiscalYear)}
+        path="/setup/companysetup/add-user"
+        element={withLayout(MainLayout, AddUserForm)}
       />
       <Route
-        path="/setup/companysetup/fiscal-years-table"
+        path="/setup/companysetup/fiscal-years"
         element={withLayout(MainLayout, FiscalYearTable)}
       />
       <Route
-        path="/setup/companysetup/tax-groups"
-        element={withLayout(MainLayout, TaxGroups)}
+        path="/setup/companysetup/add-fiscal-year"
+        element={withLayout(MainLayout, FiscalYear)}
       />
       <Route
-        path="/setup/companysetup/tax-groups-table"
+        path="/setup/companysetup/tax-groups"
         element={withLayout(MainLayout, TaxGroupsTable)}
       />
       <Route
-        path="/setup/companysetup/taxes"
-        element={withLayout(MainLayout, TaxTypes)}
+        path="/setup/companysetup/add-tax-groups"
+        element={withLayout(MainLayout, TaxGroups)}
       />
       <Route
-        path="/setup/companysetup/tax-types-table"
+        path="/setup/companysetup/taxes"
         element={withLayout(MainLayout, TaxTypesTable)}
+      />
+      <Route
+        path="/setup/companysetup/add-tax-types"
+        element={withLayout(MainLayout, TaxTypes)}
       />
 
 

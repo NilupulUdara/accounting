@@ -12,7 +12,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import theme from "../../../theme";
+import theme from "../../../../theme";
 
 export default function TaxTypes() {
   const [formData, setFormData] = useState({
@@ -57,7 +57,7 @@ export default function TaxTypes() {
         }}
       >
         <Typography variant="h6" sx={{ mb: 3 }}>
-          Tax Group Setup
+          Tax Types
         </Typography>
 
         <Stack spacing={2}>

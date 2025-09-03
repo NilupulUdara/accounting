@@ -14,55 +14,60 @@ import {
   Typography,
   useMediaQuery,
   Theme,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import { useMemo, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import Breadcrumb from "../../../components/BreadCrumb";
-import PageTitle from "../../../components/PageTitle";
-import theme from "../../../theme";
+import Breadcrumb from "../../../../components/BreadCrumb";
+import PageTitle from "../../../../components/PageTitle";
+import theme from "../../../../theme";
 
-// Mock API function (replace with your actual API)
-const getUserList = async () => [
+// Mock API function
+const getTaxGroups = async () => [
   {
     id: 1,
-    login: "john_doe",
-    fullName: "John Doe",
-    phone: "+94 123456789",
-    email: "john@example.com",
-    lastVisit: "2025-09-01T10:00:00Z",
-    accessLevel: "Admin",
+    description: "Standard Tax",
+    defaultRate: 15,
+    salesGlAccount: "4000 - Sales Revenue",
+    purchasingGlAccount: "5000 - Purchase Expenses",
+    inactive: false,
   },
   {
     id: 2,
-    login: "jane_smith",
-    fullName: "Jane Smith",
-    phone: "+94 987654321",
-    email: "jane@example.com",
-    lastVisit: "2025-08-28T15:30:00Z",
-    accessLevel: "User",
+    description: "Reduced Tax",
+    defaultRate: 8,
+    salesGlAccount: "4010 - Services Revenue",
+    purchasingGlAccount: "5010 - Freight Expenses",
+    inactive: true,
   },
 ];
 
-function UserManagementTable() {
+export default function TaxGroupTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [taxGroups, setTaxGroups] = useState<any[]>([]);
+  const [showInactive, setShowInactive] = useState(false); // global checkbox
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
-  const { data: usersData, isFetching } = useQuery({
-    queryKey: ["users"],
-    queryFn: getUserList,
+  // Fetch data (simulate API)
+  useState(() => {
+    getTaxGroups().then((data) => setTaxGroups(data));
   });
 
-  const paginatedUsersData = useMemo(() => {
-    if (!usersData) return [];
-    if (rowsPerPage === -1) return usersData;
-    return usersData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  }, [page, rowsPerPage, usersData]);
+  // Filter rows based on global checkbox
+  const filteredData = useMemo(() => {
+    return showInactive ? taxGroups : taxGroups.filter((g) => !g.inactive);
+  }, [taxGroups, showInactive]);
+
+  const paginatedData = useMemo(() => {
+    if (rowsPerPage === -1) return filteredData;
+    return filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  }, [page, rowsPerPage, filteredData]);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -76,14 +81,13 @@ function UserManagementTable() {
     setPage(0);
   };
 
-  // Mock delete handler
   const handleDelete = (id: number) => {
-    alert(`Delete user with id: ${id}`); // Replace with API call
+    alert(`Delete tax group with id: ${id}`);
   };
 
   const breadcrumbItems = [
     { title: "Home", href: "/home" },
-    { title: "Users" },
+    { title: "Tax Groups" },
   ];
 
   return (
@@ -101,19 +105,41 @@ function UserManagementTable() {
         }}
       >
         <Box>
-          <PageTitle title="Users" />
+          <PageTitle title="Tax Types" />
           <Breadcrumb breadcrumbs={breadcrumbItems} />
         </Box>
 
-        {/* Back Button */}
-        <Button
-          variant="outlined"
-          startIcon={<ArrowBackIcon />}
-          onClick={() => navigate(-1)} // back to previous page
-        >
-          Back
-        </Button>
+        <Stack direction="row" spacing={1}>
+          {/* Add User Button */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/setup/companysetup/add-tax-types")}
+          >
+            Add Tax Types
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate("/setup/companysetup")}
+          >
+            Back
+          </Button>
+        </Stack>
       </Box>
+
+      {/* Global checkbox */}
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={showInactive}
+            onChange={(e) => setShowInactive(e.target.checked)}
+          />
+        }
+        label="Show Also Inactive"
+        sx={{ ml: 2, mb: 1 }}
+      />
 
       <Stack sx={{ alignItems: "center" }}>
         <TableContainer
@@ -121,49 +147,40 @@ function UserManagementTable() {
           elevation={2}
           sx={{ overflowX: "auto", maxWidth: isMobile ? "88vw" : "100%" }}
         >
-          <Table aria-label="users table">
+          <Table aria-label="tax groups table">
             <TableHead sx={{ backgroundColor: "var(--pallet-lighter-blue)" }}>
               <TableRow>
-                <TableCell align="left">User Login</TableCell>
-                <TableCell align="left">Full Name</TableCell>
-                <TableCell align="left">Phone</TableCell>
-                <TableCell align="left">Email</TableCell>
-                <TableCell align="left">Last Visit</TableCell>
-                <TableCell align="left">Access Level</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Default Rate (%)</TableCell>
+                <TableCell>Sales GL Account</TableCell>
+                <TableCell>Purchasing GL Account</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {paginatedUsersData?.length > 0 ? (
-                paginatedUsersData.map((user) => (
-                  <TableRow key={user.id} hover>
-                    <TableCell>{user.login}</TableCell>
-                    <TableCell>{user.fullName}</TableCell>
-                    <TableCell>{user.phone}</TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>
-                      {new Date(user.lastVisit).toLocaleString()}
-                    </TableCell>
-                    <TableCell>{user.accessLevel}</TableCell>
+              {paginatedData.length > 0 ? (
+                paginatedData.map((group) => (
+                  <TableRow key={group.id} hover>
+                    <TableCell>{group.description}</TableCell>
+                    <TableCell>{group.defaultRate}</TableCell>
+                    <TableCell>{group.salesGlAccount}</TableCell>
+                    <TableCell>{group.purchasingGlAccount}</TableCell>
                     <TableCell align="center">
                       <Stack direction="row" spacing={1} justifyContent="center">
-                        {/* Edit Button */}
                         <Button
                           variant="contained"
                           size="small"
                           startIcon={<EditIcon />}
-                          onClick={() => navigate("/setup/companysetup/user-account-setup")} 
+                          onClick={() => navigate("/setup/companysetup/add-tax-types")}
                         >
                           Edit
                         </Button>
-
-                        {/* Delete Button */}
                         <Button
                           variant="outlined"
                           size="small"
                           color="error"
                           startIcon={<DeleteIcon />}
-                          onClick={() => handleDelete(user.id)}
+                          onClick={() => handleDelete(group.id)}
                         >
                           Delete
                         </Button>
@@ -173,7 +190,7 @@ function UserManagementTable() {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={7} align="center">
+                  <TableCell colSpan={5} align="center">
                     <Typography variant="body2">No Records Found</Typography>
                   </TableCell>
                 </TableRow>
@@ -183,8 +200,8 @@ function UserManagementTable() {
               <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  colSpan={7}
-                  count={usersData?.length || 0}
+                  colSpan={5}
+                  count={filteredData.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   showFirstButton
@@ -200,5 +217,3 @@ function UserManagementTable() {
     </Stack>
   );
 }
-
-export default UserManagementTable;

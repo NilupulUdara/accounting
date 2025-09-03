@@ -15,8 +15,8 @@ export default function DashboardCard({ text, icon, change, onClick }: Dashboard
       sx={{
         p: { xs: 2, sm: 3 },
         display: "flex",
-        flexDirection: { xs: "column", sm: "row" }, // stack on mobile
-        alignItems: { xs: "flex-start", sm: "center" },
+        flexDirection: "row",
+        alignItems: "center",
         justifyContent: "space-between",
         backgroundColor: "#fff",
         borderRadius: 3,
@@ -52,11 +52,7 @@ export default function DashboardCard({ text, icon, change, onClick }: Dashboard
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 0.5,
-            }}
+            sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}
           >
             compared last…
             <span
@@ -77,10 +73,9 @@ export default function DashboardCard({ text, icon, change, onClick }: Dashboard
         alignItems="center"
         gap={1}
         sx={{
-          mt: { xs: 2, sm: 0 },
-          width: { xs: "100%", sm: "auto" },
-          justifyContent: { xs: "flex-start", sm: "flex-end" },
-          flexShrink: 0, // prevent shrinking
+          width: "auto",
+          justifyContent: "flex-end",
+          flexShrink: 0,
         }}
       >
         <Box
@@ -89,18 +84,13 @@ export default function DashboardCard({ text, icon, change, onClick }: Dashboard
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "50%",
-            width: { xs: 40, sm: 50 },
-            height: { xs: 40, sm: 50 },
+            width: 50,
+            height: 50,
           }}
         >
-          {React.cloneElement(icon, {
-            sx: { color: "#000", fontSize: { xs: 20, sm: 24 } },
-          })}
+          {React.cloneElement(icon, { sx: { color: "#000", fontSize: 24 } })}
         </Box>
-        <ArrowForwardIosIcon
-          fontSize="small"
-          sx={{ color: "gray", fontSize: { xs: 16, sm: 20 } }}
-        />
+        <ArrowForwardIosIcon fontSize="small" sx={{ color: "gray", fontSize: 20 }} />
       </Box>
     </Paper>
   );

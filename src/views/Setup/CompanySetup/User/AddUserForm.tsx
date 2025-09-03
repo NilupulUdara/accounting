@@ -14,7 +14,7 @@ import {
     FormControl,
     InputLabel,
 } from "@mui/material";
-import theme from "../../../theme";
+import theme from "../../../../theme";
 
 export default function UserSetupForm() {
     const [formData, setFormData] = useState({

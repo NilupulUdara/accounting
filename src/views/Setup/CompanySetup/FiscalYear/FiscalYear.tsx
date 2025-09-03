@@ -8,7 +8,7 @@ import {
     Divider,
     TextField,
 } from "@mui/material";
-import theme from "../../../theme";
+import theme from "../../../../theme";
 import { useForm, Controller } from "react-hook-form";
 
 export default function FiscalYear() {

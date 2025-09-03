@@ -17,31 +17,27 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
-import Breadcrumb from "../../../components/BreadCrumb";
-import PageTitle from "../../../components/PageTitle";
-import theme from "../../../theme";
+import Breadcrumb from "../../../../components/BreadCrumb";
+import PageTitle from "../../../../components/PageTitle";
+import theme from "../../../../theme";
 
 // Mock API function
 const getTaxGroups = async () => [
   {
     id: 1,
     description: "Standard Tax",
-    defaultRate: 15,
-    salesGlAccount: "4000 - Sales Revenue",
-    purchasingGlAccount: "5000 - Purchase Expenses",
+    taxExempt: "No",
     inactive: false,
   },
   {
     id: 2,
     description: "Reduced Tax",
-    defaultRate: 8,
-    salesGlAccount: "4010 - Services Revenue",
-    purchasingGlAccount: "5010 - Freight Expenses",
+    taxExempt: "Yes",
     inactive: true,
   },
 ];
@@ -55,11 +51,11 @@ export default function TaxGroupTable() {
   const navigate = useNavigate();
 
   // Fetch data (simulate API)
-  useState(() => {
+  useEffect(() => {
     getTaxGroups().then((data) => setTaxGroups(data));
-  });
+  }, []);
 
-  // Filter rows based on global checkbox
+  // Filter data based on global checkbox
   const filteredData = useMemo(() => {
     return showInactive ? taxGroups : taxGroups.filter((g) => !g.inactive);
   }, [taxGroups, showInactive]);
@@ -109,16 +105,27 @@ export default function TaxGroupTable() {
           <Breadcrumb breadcrumbs={breadcrumbItems} />
         </Box>
 
-        <Button
-          variant="outlined"
-          startIcon={<ArrowBackIcon />}
-          onClick={() => navigate("/setup/companysetup/tax-groups")}
-        >
-          Back
-        </Button>
+        <Stack direction="row" spacing={1}>
+          {/* Add User Button */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/setup/companysetup/add-tax-groups")}
+          >
+            Add Tax Groups
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate("/setup/companysetup")}
+          >
+            Back
+          </Button>
+        </Stack>
       </Box>
 
-      {/* Global checkbox */}
+      {/* Global checkbox for the entire table */}
       <FormControlLabel
         control={
           <Checkbox
@@ -140,9 +147,7 @@ export default function TaxGroupTable() {
             <TableHead sx={{ backgroundColor: "var(--pallet-lighter-blue)" }}>
               <TableRow>
                 <TableCell>Description</TableCell>
-                <TableCell>Default Rate (%)</TableCell>
-                <TableCell>Sales GL Account</TableCell>
-                <TableCell>Purchasing GL Account</TableCell>
+                <TableCell>Tax Exempt</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -151,16 +156,14 @@ export default function TaxGroupTable() {
                 paginatedData.map((group) => (
                   <TableRow key={group.id} hover>
                     <TableCell>{group.description}</TableCell>
-                    <TableCell>{group.defaultRate}</TableCell>
-                    <TableCell>{group.salesGlAccount}</TableCell>
-                    <TableCell>{group.purchasingGlAccount}</TableCell>
+                    <TableCell>{group.taxExempt}</TableCell>
                     <TableCell align="center">
                       <Stack direction="row" spacing={1} justifyContent="center">
                         <Button
                           variant="contained"
                           size="small"
                           startIcon={<EditIcon />}
-                          onClick={() => alert(`Edit ${group.description}`)}
+                          onClick={() => navigate("/setup/companysetup/add-tax-groups")}
                         >
                           Edit
                         </Button>
@@ -179,7 +182,7 @@ export default function TaxGroupTable() {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={5} align="center">
+                  <TableCell colSpan={3} align="center">
                     <Typography variant="body2">No Records Found</Typography>
                   </TableCell>
                 </TableRow>
@@ -189,7 +192,7 @@ export default function TaxGroupTable() {
               <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  colSpan={5}
+                  colSpan={3}
                   count={filteredData.length}
                   rowsPerPage={rowsPerPage}
                   page={page}

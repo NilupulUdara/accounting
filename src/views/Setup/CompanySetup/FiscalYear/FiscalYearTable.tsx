@@ -21,9 +21,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import theme from "../../../theme";
-import Breadcrumb from "../../../components/BreadCrumb";
-import PageTitle from "../../../components/PageTitle";
+import theme from "../../../../theme";
+import Breadcrumb from "../../../../components/BreadCrumb";
+import PageTitle from "../../../../components/PageTitle";
 
 // Mock API - replace with real API call
 const getFiscalYears = async () => {
@@ -58,7 +58,7 @@ function FiscalYearTable() {
   };
 
   const handleDelete = (id: number) => {
-    alert(`Delete fiscal year with id: ${id}`); // Replace with API call
+    alert(`Delete fiscal year with id: ${id}`);
   };
 
   const breadcrumbItems = [
@@ -85,13 +85,24 @@ function FiscalYearTable() {
           <Breadcrumb breadcrumbs={breadcrumbItems} />
         </Box>
 
-        <Button
-          variant="outlined"
-          startIcon={<ArrowBackIcon />}
-          onClick={() => navigate("/setup/companysetup/fiscal-years")}
-        >
-          Back
-        </Button>
+        <Stack direction="row" spacing={1}>
+          {/* Add User Button */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/setup/companysetup/add-fiscal-year")}
+          >
+            Add Fiscal Year
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate("/setup/companysetup")}
+          >
+            Back
+          </Button>
+        </Stack>
       </Box>
 
       <Stack sx={{ alignItems: "center" }}>
