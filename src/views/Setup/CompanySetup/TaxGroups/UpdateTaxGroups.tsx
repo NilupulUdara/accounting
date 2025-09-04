@@ -8,7 +8,8 @@ import {
   Checkbox,
   Button,
   Paper,
-  FormHelperText,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import theme from "../../../../theme";
 
@@ -19,6 +20,9 @@ interface TaxGroupFormData {
 }
 
 export default function UpdateTaxGroupsForm() {
+  const muiTheme = useTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
+
   const [formData, setFormData] = useState<TaxGroupFormData>({
     description: "",
     tax: false,
@@ -60,17 +64,20 @@ export default function UpdateTaxGroupsForm() {
   };
 
   return (
-    <Stack alignItems="center" sx={{ mt: 4 }}>
+    <Stack alignItems="center" sx={{ mt: 4, px: 2 }}>
       <Paper
         sx={{
           p: theme.spacing(3),
-          maxWidth: "500px",
           width: "100%",
+          maxWidth: isMobile ? "100%" : "500px",
           boxShadow: 2,
           borderRadius: 2,
         }}
       >
-        <Typography variant="h6" sx={{ mb: 3 }}>
+        <Typography
+          variant="h6"
+          sx={{ mb: 3, textAlign: isMobile ? "center" : "left" }}
+        >
           Tax Group Setup
         </Typography>
 
@@ -109,15 +116,30 @@ export default function UpdateTaxGroupsForm() {
           />
         </Stack>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-          <Button onClick={() => window.history.back()}>Back</Button>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            justifyContent: "space-between",
+            gap: 2,
+            mt: 3,
+          }}
+        >
+          <Button
+            fullWidth={isMobile}
+            onClick={() => window.history.back()}
+            variant="outlined"
+          >
+            Back
+          </Button>
 
           <Button
+            fullWidth={isMobile}
             variant="contained"
             sx={{ backgroundColor: "var(--pallet-blue)" }}
             onClick={handleSubmit}
           >
-            Add New
+            Update
           </Button>
         </Box>
       </Paper>

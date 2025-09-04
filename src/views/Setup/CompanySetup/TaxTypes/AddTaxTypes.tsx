@@ -12,6 +12,8 @@ import {
   MenuItem,
   SelectChangeEvent,
   FormHelperText,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import theme from "../../../../theme";
 
@@ -31,6 +33,9 @@ export default function AddTaxTypes() {
   });
 
   const [errors, setErrors] = useState<Partial<TaxFormData>>({});
+
+  const muiTheme = useTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -73,17 +78,17 @@ export default function AddTaxTypes() {
   };
 
   return (
-    <Stack alignItems="center" sx={{ mt: 4 }}>
+    <Stack alignItems="center" sx={{ mt: 4, px: isMobile ? 2 : 0 }}>
       <Paper
         sx={{
           p: theme.spacing(3),
-          maxWidth: "500px",
+          maxWidth: isMobile ? "100%" : "500px",
           width: "100%",
           boxShadow: 2,
           borderRadius: 2,
         }}
       >
-        <Typography variant="h6" sx={{ mb: 3 }}>
+        <Typography variant="h6" sx={{ mb: 3, textAlign: isMobile ? "center" : "left" }}>
           Tax Types
         </Typography>
 
@@ -142,11 +147,26 @@ export default function AddTaxTypes() {
           </FormControl>
         </Stack>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-          <Button onClick={() => window.history.back()}>Back</Button>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            justifyContent: "space-between",
+            mt: 3,
+            gap: isMobile ? 2 : 0,
+          }}
+        >
+          <Button
+            fullWidth={isMobile}
+            variant="outlined"
+            onClick={() => window.history.back()}
+          >
+            Back
+          </Button>
 
           <Button
             variant="contained"
+            fullWidth={isMobile}
             sx={{ backgroundColor: "var(--pallet-blue)" }}
             onClick={handleSubmit}
           >

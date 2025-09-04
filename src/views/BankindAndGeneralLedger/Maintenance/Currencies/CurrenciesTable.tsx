@@ -157,7 +157,7 @@ export default function CurrencyTable() {
           <SearchBar
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
-            placeholder="Search by Abbreviation, Name, or Country"
+            placeholder="Search..."
           />
         </Box>
       </Stack>

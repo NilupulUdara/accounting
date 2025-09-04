@@ -14,6 +14,8 @@ import {
   FormGroup,
   FormControlLabel,
   FormHelperText,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import theme from "../../../../theme";
 
@@ -68,6 +70,9 @@ export default function AddUserAccessForm() {
   });
 
   const [errors, setErrors] = useState<Partial<UserAccessFormData>>({});
+
+  const muiTheme = useTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | any
@@ -128,7 +133,7 @@ export default function AddUserAccessForm() {
   };
 
   return (
-    <Stack alignItems="center" sx={{ mt: 4 }}>
+    <Stack alignItems="center" sx={{ mt: 4, px: isMobile ? 2 : 0 }}>
       {/* Dropdown to select existing roles */}
       <Box sx={{ width: "100%", maxWidth: "600px", mb: 3 }}>
         <FormControl fullWidth size="small">
@@ -252,11 +257,18 @@ export default function AddUserAccessForm() {
           </Box>
         </Stack>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-          <Button onClick={() => window.history.back()}>Back</Button>
+        <Box sx={{
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            justifyContent: "space-between",
+            mt: 3,
+            gap: isMobile ? 2 : 0,
+          }}>
+          <Button  fullWidth={isMobile} onClick={() => window.history.back()}>Back</Button>
 
           <Button
             variant="contained"
+            fullWidth={isMobile}
             sx={{ backgroundColor: "var(--pallet-blue)" }}
             onClick={handleSubmit}
           >

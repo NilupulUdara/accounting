@@ -25,7 +25,7 @@ import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../../../../components/BreadCrumb";
 import PageTitle from "../../../../components/PageTitle";
 import theme from "../../../../theme";
-import SearchBar from "../../../../components/SearchBar"; // Import reusable SearchBar
+import SearchBar from "../../../../components/SearchBar";
 
 // Mock API function
 const getTaxGroups = async () => [

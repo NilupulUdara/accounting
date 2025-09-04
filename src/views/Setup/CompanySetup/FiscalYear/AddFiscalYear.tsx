@@ -7,8 +7,9 @@ import {
     Paper,
     Divider,
     TextField,
+    useMediaQuery,
+    useTheme,
 } from "@mui/material";
-import theme from "../../../../theme";
 import { useForm, Controller } from "react-hook-form";
 
 interface FiscalYearFormData {
@@ -17,6 +18,9 @@ interface FiscalYearFormData {
 }
 
 export default function AddFiscalYear() {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
     const {
         control,
         handleSubmit,
@@ -37,17 +41,17 @@ export default function AddFiscalYear() {
     };
 
     return (
-        <Stack alignItems="center" sx={{ mt: 4 }}>
+        <Stack alignItems="center" sx={{ mt: 4, px: 2 }}>
             <Paper
                 sx={{
                     p: theme.spacing(3),
-                    maxWidth: "90%",
-                    width: "600px",
+                    width: "100%",
+                    maxWidth: isMobile ? "100%" : "600px",
                     boxShadow: 2,
                     borderRadius: 2,
                 }}
             >
-                <Typography variant="h6" sx={{ mb: 2 }}>
+                <Typography variant="h6" sx={{ mb: 2, textAlign: isMobile ? "center" : "left" }}>
                     Fiscal Year Setup
                 </Typography>
 
@@ -95,10 +99,25 @@ export default function AddFiscalYear() {
                     />
                 </Stack>
 
-                <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-                    <Button onClick={() => window.history.back()}>Back</Button>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: isMobile ? "column" : "row",
+                        justifyContent: "space-between",
+                        gap: 2,
+                        mt: 3,
+                    }}
+                >
+                    <Button
+                        fullWidth={isMobile}
+                        onClick={() => window.history.back()}
+                        variant="outlined"
+                    >
+                        Back
+                    </Button>
 
                     <Button
+                        fullWidth={isMobile}
                         variant="contained"
                         sx={{ backgroundColor: "var(--pallet-blue)" }}
                         onClick={handleSubmit(onSubmit)}

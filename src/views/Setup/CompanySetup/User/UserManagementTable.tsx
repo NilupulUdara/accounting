@@ -243,7 +243,8 @@ function UserManagementTable() {
                           variant="contained"
                           size="small"
                           startIcon={<EditIcon />}
-                          onClick={() => navigate(`/setup/companysetup/update-user/${user.id}`)}
+                          // onClick={() => navigate(`/setup/companysetup/update-user/${user.id}`)}
+                          onClick={() => navigate("/setup/companysetup/update-user")}
                         >
                           Edit
                         </Button>
