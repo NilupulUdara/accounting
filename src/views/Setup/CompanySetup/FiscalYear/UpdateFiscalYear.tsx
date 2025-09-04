@@ -11,20 +11,29 @@ import {
 import theme from "../../../../theme";
 import { useForm, Controller } from "react-hook-form";
 
-export default function FiscalYear() {
+interface FiscalYearFormData {
+    fiscalYearFrom: string;
+    fiscalYearTo: string;
+}
+
+export default function UpdateFiscalYear() {
     const {
         control,
         handleSubmit,
-    } = useForm({
+        watch,
+        formState: { errors },
+    } = useForm<FiscalYearFormData>({
         defaultValues: {
-            fiscalYearFrom: null,
-            fiscalYearTo: null,
-            isClosed: false,
+            fiscalYearFrom: "",
+            fiscalYearTo: "",
         },
     });
 
-    const onSubmit = (data: any) => {
+    const fiscalYearFrom = watch("fiscalYearFrom");
+
+    const onSubmit = (data: FiscalYearFormData) => {
         console.log("Submitted:", data);
+        alert("Fiscal Year submitted successfully!");
     };
 
     return (
@@ -48,6 +57,7 @@ export default function FiscalYear() {
                     <Controller
                         name="fiscalYearFrom"
                         control={control}
+                        rules={{ required: "Fiscal Year Begin is required" }}
                         render={({ field }) => (
                             <TextField
                                 {...field}
@@ -55,6 +65,8 @@ export default function FiscalYear() {
                                 type="date"
                                 InputLabelProps={{ shrink: true }}
                                 fullWidth
+                                error={!!errors.fiscalYearFrom}
+                                helperText={errors.fiscalYearFrom?.message}
                             />
                         )}
                     />
@@ -62,6 +74,13 @@ export default function FiscalYear() {
                     <Controller
                         name="fiscalYearTo"
                         control={control}
+                        rules={{
+                            required: "Fiscal Year End is required",
+                            validate: (value) =>
+                                !fiscalYearFrom || value >= fiscalYearFrom
+                                    ? true
+                                    : "Fiscal Year End must be after Begin",
+                        }}
                         render={({ field }) => (
                             <TextField
                                 {...field}
@@ -69,6 +88,8 @@ export default function FiscalYear() {
                                 type="date"
                                 InputLabelProps={{ shrink: true }}
                                 fullWidth
+                                error={!!errors.fiscalYearTo}
+                                helperText={errors.fiscalYearTo?.message}
                             />
                         )}
                     />

@@ -24,19 +24,24 @@ import { useNavigate } from "react-router-dom";
 import theme from "../../../../theme";
 import Breadcrumb from "../../../../components/BreadCrumb";
 import PageTitle from "../../../../components/PageTitle";
+import SearchBar from "../../../../components/SearchBar";
 
-// Mock API - replace with real API call
-const getFiscalYears = async () => {
-  return [
-    { id: 1, fiscalYearBegin: "2025-01-01", fiscalYearEnd: "2025-12-31", isClosed: false },
-    { id: 2, fiscalYearBegin: "2024-01-01", fiscalYearEnd: "2024-12-31", isClosed: true },
-    { id: 3, fiscalYearBegin: "2023-01-01", fiscalYearEnd: "2023-12-31", isClosed: true },
-  ];
-};
+const getFiscalYears = async () => [
+  { id: 1, fiscalYearBegin: "2025-01-01", fiscalYearEnd: "2025-12-31", isClosed: false },
+  { id: 2, fiscalYearBegin: "2024-01-01", fiscalYearEnd: "2024-12-31", isClosed: true },
+  { id: 3, fiscalYearBegin: "2023-01-01", fiscalYearEnd: "2023-12-31", isClosed: true },
+  { id: 4, fiscalYearBegin: "2025-01-01", fiscalYearEnd: "2025-12-31", isClosed: false },
+  { id: 5, fiscalYearBegin: "2024-01-01", fiscalYearEnd: "2024-12-31", isClosed: true },
+  { id: 6, fiscalYearBegin: "2023-01-01", fiscalYearEnd: "2023-12-31", isClosed: true },
+  { id: 7, fiscalYearBegin: "2025-01-01", fiscalYearEnd: "2025-12-31", isClosed: false },
+  { id: 8, fiscalYearBegin: "2024-01-01", fiscalYearEnd: "2024-12-31", isClosed: true },
+  { id: 9, fiscalYearBegin: "2023-01-01", fiscalYearEnd: "2023-12-31", isClosed: true },
+];
 
 function FiscalYearTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
 
@@ -45,11 +50,19 @@ function FiscalYearTable() {
     queryFn: getFiscalYears,
   });
 
+  const filteredData = useMemo(() => {
+    return fiscalYears.filter(
+      (fy) =>
+        fy.fiscalYearBegin.includes(searchQuery) ||
+        fy.fiscalYearEnd.includes(searchQuery) ||
+        (fy.isClosed ? "Yes" : "No").toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [fiscalYears, searchQuery]);
+
   const paginatedData = useMemo(() => {
-    if (!fiscalYears) return [];
-    if (rowsPerPage === -1) return fiscalYears;
-    return fiscalYears.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  }, [fiscalYears, page, rowsPerPage]);
+    if (rowsPerPage === -1) return filteredData;
+    return filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  }, [filteredData, page, rowsPerPage]);
 
   const handleChangePage = (_event: unknown, newPage: number) => setPage(newPage);
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -86,7 +99,6 @@ function FiscalYearTable() {
         </Box>
 
         <Stack direction="row" spacing={1}>
-          {/* Add User Button */}
           <Button
             variant="contained"
             color="primary"
@@ -104,6 +116,26 @@ function FiscalYearTable() {
           </Button>
         </Stack>
       </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          px: 2,
+          mb: 2,
+          width: "100%",
+          maxWidth: isMobile ? "88vw" : "100%",
+        }}
+      >
+        <Box sx={{ width: isMobile ? "100%" : "300px" }}>
+          <SearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            placeholder="Search Fiscal Years..."
+          />
+        </Box>
+      </Box>
+
 
       <Stack sx={{ alignItems: "center" }}>
         <TableContainer
@@ -134,7 +166,7 @@ function FiscalYearTable() {
                           variant="contained"
                           size="small"
                           startIcon={<EditIcon />}
-                          onClick={() => navigate(`/fiscal-year/edit/${fy.id}`)}
+                          onClick={() => navigate("/setup/companysetup/update-fiscal-year/")}
                         >
                           Edit
                         </Button>
@@ -154,7 +186,9 @@ function FiscalYearTable() {
               ) : (
                 <TableRow>
                   <TableCell colSpan={4} align="center">
-                    <Typography variant="body2">{isFetching ? "Loading..." : "No Records Found"}</Typography>
+                    <Typography variant="body2">
+                      {isFetching ? "Loading..." : "No Records Found"}
+                    </Typography>
                   </TableCell>
                 </TableRow>
               )}
@@ -165,7 +199,7 @@ function FiscalYearTable() {
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                   colSpan={4}
-                  count={fiscalYears?.length || 0}
+                  count={filteredData.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onPageChange={handleChangePage}

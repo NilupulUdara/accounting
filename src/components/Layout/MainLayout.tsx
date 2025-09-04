@@ -140,7 +140,7 @@ export default function MainLayout({ children }: Props) {
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [openEditUserRoleDialog, setOpenEditUserRoleDialog] = useState(false);
   const statusColor = user?.availability ? "#44b700" : "#f44336";
-
+  const openProfileDrawer = () => setOpenViewProfileDrawer(true);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -301,7 +301,7 @@ export default function MainLayout({ children }: Props) {
             },
           }}
         >
-          <DrawerContent handleDrawerClose={handleDrawerClose} />
+          <DrawerContent handleDrawerClose={handleDrawerClose} openProfileDrawer={openProfileDrawer}/>
         </MobileDrawer>
       ) : (
         <Drawer
@@ -315,7 +315,7 @@ export default function MainLayout({ children }: Props) {
             },
           }}
         >
-          <DrawerContent handleDrawerClose={handleDrawerClose} />
+          <DrawerContent handleDrawerClose={handleDrawerClose} openProfileDrawer={openProfileDrawer} />
         </Drawer>
       )}
       <Box component="main" sx={{ flexGrow: 1, }}>
@@ -328,8 +328,10 @@ export default function MainLayout({ children }: Props) {
 
 const DrawerContent = ({
   handleDrawerClose,
+  openProfileDrawer,
 }: {
   handleDrawerClose: () => void;
+  openProfileDrawer: () => void;
 }) => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -465,8 +467,8 @@ const DrawerContent = ({
               display: "flex",
               alignItems: "center",
               mb: 2,
-
             }}
+             onClick={openProfileDrawer}
           >
             <ProfileImage
               name={user?.name}

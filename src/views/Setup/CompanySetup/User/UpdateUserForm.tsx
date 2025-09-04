@@ -30,7 +30,7 @@ interface UserFormData {
 }
 
 
-export default function AddUserForm() {
+export default function UpdateUserForm() {
   const [formData, setFormData] = useState<UserFormData>({
     id: "",
     firstName: "",

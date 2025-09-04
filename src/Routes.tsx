@@ -38,12 +38,26 @@ import FixedAssestsInquiriesAndReports from "./views/FixedAssets/InquiriesAndRep
 import CompanySetupForm from "./views/Setup/CompanySetup/CompanySetupForm";
 import AddUserForm from "./views/Setup/CompanySetup/User/AddUserForm";
 import UserManagementTable from "./views/Setup/CompanySetup/User/UserManagementTable";
-import FiscalYear from "./views/Setup/CompanySetup/FiscalYear/FiscalYear";
+import FiscalYear from "./views/Setup/CompanySetup/FiscalYear/AddFiscalYear";
 import FiscalYearTable from "./views/Setup/CompanySetup/FiscalYear/FiscalYearTable";
 import TaxGroupsTable from "./views/Setup/CompanySetup/TaxGroups/TaxGroupsTable";
-import TaxGroups from "./views/Setup/CompanySetup/TaxGroups/TaxGroups";
-import TaxTypes from "./views/Setup/CompanySetup/TaxTypes/TaxTypes";
+import TaxGroups from "./views/Setup/CompanySetup/TaxGroups/AddTaxGroups";
+import TaxTypes from "./views/Setup/CompanySetup/TaxTypes/AddTaxTypes";
 import TaxTypesTable from "./views/Setup/CompanySetup/TaxTypes/TaxTypesTable";
+import Currencies from "./views/BankindAndGeneralLedger/Maintenance/Currencies/AddCurrencies";
+import CurrenciesTable from "./views/BankindAndGeneralLedger/Maintenance/Currencies/CurrenciesTable";
+import UserAccessForm from "./views/Setup/CompanySetup/UserAccess/AddUserAccessForm";
+import AddUserAccessForm from "./views/Setup/CompanySetup/UserAccess/AddUserAccessForm";
+import UpdateUserAccessForm from "./views/Setup/CompanySetup/UserAccess/UpdateUserAccessForm";
+import UpdateUserForm from "./views/Setup/CompanySetup/User/UpdateUserForm";
+import AddTaxTypes from "./views/Setup/CompanySetup/TaxTypes/AddTaxTypes";
+import UpdateTaxTypes from "./views/Setup/CompanySetup/TaxTypes/UpdateTaxTypes";
+import AddTaxGroupsForm from "./views/Setup/CompanySetup/TaxGroups/AddTaxGroups";
+import UpdateTaxGroupsForm from "./views/Setup/CompanySetup/TaxGroups/UpdateTaxGroups";
+import AddFiscalYear from "./views/Setup/CompanySetup/FiscalYear/AddFiscalYear";
+import UpdateFiscalYear from "./views/Setup/CompanySetup/FiscalYear/UpdateFiscalYear";
+import AddCurrencies from "./views/BankindAndGeneralLedger/Maintenance/Currencies/AddCurrencies";
+import UpdateCurrencies from "./views/BankindAndGeneralLedger/Maintenance/Currencies/UpdateCurrencies";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -261,12 +275,8 @@ const AppRoutes = () => {
       <Route path="/register" element={withoutLayout(RegistrationPage)} />
       <Route element={<ProtectedRoute />}>
         <Route
-          path="/home"
-          element={withLayout(
-            MainLayout,
-            InsightsPage,
-            !userPermissionObject?.[PermissionKeys.INSIGHT_VIEW]
-          )}
+          path="/dashboard"
+          element={withLayout(MainLayout, Dashboard)}
         />
 
         {/* Administration */}
@@ -896,6 +906,18 @@ const AppRoutes = () => {
         path="/bankingandgeneralledger/maintenance"
         element={withLayout(MainLayout, BankingMaintenance)}
       />
+      <Route
+        path="/bankingandgeneralledger/maintenance/currencies"
+        element={withLayout(MainLayout, CurrenciesTable)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/add-currency"
+        element={withLayout(MainLayout, AddCurrencies)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/update-currency"
+        element={withLayout(MainLayout, UpdateCurrencies)}
+      />
 
       <Route
         path="/setup/companysetup"
@@ -914,12 +936,29 @@ const AppRoutes = () => {
         element={withLayout(MainLayout, AddUserForm)}
       />
       <Route
+        path="/setup/companysetup/update-user"
+        element={withLayout(MainLayout, UpdateUserForm)}
+      />
+      <Route
+        path="setup/companysetup/access-setup"
+        element={withLayout(MainLayout, AddUserAccessForm)}
+      />
+      <Route
+        path="setup/companysetup/edit-access-setup"
+        element={withLayout(MainLayout, UpdateUserAccessForm)}
+      />
+      
+      <Route
         path="/setup/companysetup/fiscal-years"
         element={withLayout(MainLayout, FiscalYearTable)}
       />
       <Route
         path="/setup/companysetup/add-fiscal-year"
-        element={withLayout(MainLayout, FiscalYear)}
+        element={withLayout(MainLayout, AddFiscalYear)}
+      />
+      <Route
+        path="/setup/companysetup/update-fiscal-year"
+        element={withLayout(MainLayout, UpdateFiscalYear)}
       />
       <Route
         path="/setup/companysetup/tax-groups"
@@ -927,7 +966,11 @@ const AppRoutes = () => {
       />
       <Route
         path="/setup/companysetup/add-tax-groups"
-        element={withLayout(MainLayout, TaxGroups)}
+        element={withLayout(MainLayout, AddTaxGroupsForm)}
+      />
+      <Route
+        path="/setup/companysetup/update-tax-groups"
+        element={withLayout(MainLayout, UpdateTaxGroupsForm)}
       />
       <Route
         path="/setup/companysetup/taxes"
@@ -935,7 +978,11 @@ const AppRoutes = () => {
       />
       <Route
         path="/setup/companysetup/add-tax-types"
-        element={withLayout(MainLayout, TaxTypes)}
+        element={withLayout(MainLayout, AddTaxTypes)}
+      />
+      <Route
+        path="/setup/companysetup/update-tax-types"
+        element={withLayout(MainLayout, UpdateTaxTypes)}
       />
 
 

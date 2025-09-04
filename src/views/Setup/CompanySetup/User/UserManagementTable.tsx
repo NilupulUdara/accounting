@@ -24,61 +24,138 @@ import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../../../../components/BreadCrumb";
 import PageTitle from "../../../../components/PageTitle";
 import theme from "../../../../theme";
+import SearchBar from "../../../../components/SearchBar";
 
-// Mock API function (replace with your actual API)
+// Mock API function
 const getUserList = async () => [
   {
     id: 1,
     login: "john_doe",
     fullName: "John Doe",
-    phone: "+94 123456789",
+    department: "Finance",
     email: "john@example.com",
-    lastVisit: "2025-09-01T10:00:00Z",
-    accessLevel: "Admin",
+    role: "Admin",
+    status: "Active",
   },
   {
     id: 2,
     login: "jane_smith",
     fullName: "Jane Smith",
-    phone: "+94 987654321",
+    department: "HR",
     email: "jane@example.com",
-    lastVisit: "2025-08-28T15:30:00Z",
-    accessLevel: "User",
+    role: "User",
+    status: "Inactive",
+  },
+  {
+    id: 3,
+    login: "john_doe",
+    fullName: "John Doe",
+    department: "Finance",
+    email: "john@example.com",
+    role: "Admin",
+    status: "Active",
+  },
+  {
+    id: 4,
+    login: "jane_smith",
+    fullName: "Jane Smith",
+    department: "HR",
+    email: "jane@example.com",
+    role: "User",
+    status: "Inactive",
+  },{
+    id: 5,
+    login: "john_doe",
+    fullName: "John Doe",
+    department: "Finance",
+    email: "john@example.com",
+    role: "Admin",
+    status: "Active",
+  },
+  {
+    id: 6,
+    login: "jane_smith",
+    fullName: "Jane Smith",
+    department: "HR",
+    email: "jane@example.com",
+    role: "User",
+    status: "Inactive",
+  },{
+    id: 7,
+    login: "john_doe",
+    fullName: "John Doe",
+    department: "Finance",
+    email: "john@example.com",
+    role: "Admin",
+    status: "Active",
+  },
+  {
+    id: 8,
+    login: "jane_smith",
+    fullName: "Jane Smith",
+    department: "HR",
+    email: "jane@example.com",
+    role: "User",
+    status: "Inactive",
+  },{
+    id: 9,
+    login: "john_doe",
+    fullName: "John Doe",
+    department: "Finance",
+    email: "john@example.com",
+    role: "Admin",
+    status: "Active",
+  },
+  {
+    id: 10,
+    login: "jane_smith",
+    fullName: "Jane Smith",
+    department: "HR",
+    email: "jane@example.com",
+    role: "User",
+    status: "Inactive",
   },
 ];
 
 function UserManagementTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [searchQuery, setSearchQuery] = useState("");
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
-  const { data: usersData, isFetching } = useQuery({
+  const { data: usersData = [] } = useQuery({
     queryKey: ["users"],
     queryFn: getUserList,
   });
 
-  const paginatedUsersData = useMemo(() => {
+  const filteredUsers = useMemo(() => {
     if (!usersData) return [];
-    if (rowsPerPage === -1) return usersData;
-    return usersData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  }, [page, rowsPerPage, usersData]);
+    if (!searchQuery.trim()) return usersData;
+    const lowerQuery = searchQuery.toLowerCase();
+    return usersData.filter(
+      (user) =>
+        user.fullName.toLowerCase().includes(lowerQuery) ||
+        user.department.toLowerCase().includes(lowerQuery) ||
+        user.email.toLowerCase().includes(lowerQuery) ||
+        user.role.toLowerCase().includes(lowerQuery) ||
+        user.status.toLowerCase().includes(lowerQuery)
+    );
+  }, [usersData, searchQuery]);
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => setPage(newPage);
+  const paginatedUsersData = useMemo(() => {
+    if (rowsPerPage === -1) return filteredUsers;
+    return filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  }, [filteredUsers, page, rowsPerPage]);
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChangePage = (_event: unknown, newPage: number) => setPage(newPage);
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  // Mock delete handler
   const handleDelete = (id: number) => {
-    alert(`Delete user with id: ${id}`); // Replace with API call
+    alert(`Delete user with id: ${id}`);
   };
 
   const breadcrumbItems = [
@@ -106,7 +183,6 @@ function UserManagementTable() {
         </Box>
 
         <Stack direction="row" spacing={1}>
-          {/* Add User Button */}
           <Button
             variant="contained"
             color="primary"
@@ -115,7 +191,6 @@ function UserManagementTable() {
             Add User
           </Button>
 
-          {/* Back Button */}
           <Button
             variant="outlined"
             startIcon={<ArrowBackIcon />}
@@ -124,6 +199,13 @@ function UserManagementTable() {
             Back
           </Button>
         </Stack>
+      </Box>
+
+      {/* Search Bar */}
+      <Box sx={{ display: "flex", justifyContent: "flex-end", px: 2, mb: 2, width: "100%" }}>
+        <Box sx={{ width: isMobile ? "100%" : "300px" }}>
+          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder="Search..." />
+        </Box>
       </Box>
 
       <Stack sx={{ alignItems: "center" }}>
@@ -135,40 +217,36 @@ function UserManagementTable() {
           <Table aria-label="users table">
             <TableHead sx={{ backgroundColor: "var(--pallet-lighter-blue)" }}>
               <TableRow>
-                <TableCell align="left">User Login</TableCell>
-                <TableCell align="left">Full Name</TableCell>
-                <TableCell align="left">Phone</TableCell>
-                <TableCell align="left">Email</TableCell>
-                <TableCell align="left">Last Visit</TableCell>
-                <TableCell align="left">Access Level</TableCell>
+                <TableCell>No</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Department</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Role</TableCell>
+                <TableCell>Status</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
-              {paginatedUsersData?.length > 0 ? (
-                paginatedUsersData.map((user) => (
+              {paginatedUsersData.length > 0 ? (
+                paginatedUsersData.map((user, index) => (
                   <TableRow key={user.id} hover>
-                    <TableCell>{user.login}</TableCell>
+                    <TableCell>{page * rowsPerPage + index + 1}</TableCell>
                     <TableCell>{user.fullName}</TableCell>
-                    <TableCell>{user.phone}</TableCell>
+                    <TableCell>{user.department}</TableCell>
                     <TableCell>{user.email}</TableCell>
-                    <TableCell>
-                      {new Date(user.lastVisit).toLocaleString()}
-                    </TableCell>
-                    <TableCell>{user.accessLevel}</TableCell>
+                    <TableCell>{user.role}</TableCell>
+                    <TableCell>{user.status}</TableCell>
                     <TableCell align="center">
                       <Stack direction="row" spacing={1} justifyContent="center">
-                        {/* Edit Button */}
                         <Button
                           variant="contained"
                           size="small"
                           startIcon={<EditIcon />}
-                          onClick={() => navigate("/setup/companysetup/add-user")}
+                          onClick={() => navigate(`/setup/companysetup/update-user/${user.id}`)}
                         >
                           Edit
                         </Button>
-
-                        {/* Delete Button */}
                         <Button
                           variant="outlined"
                           size="small"
@@ -190,18 +268,19 @@ function UserManagementTable() {
                 </TableRow>
               )}
             </TableBody>
+
             <TableFooter>
               <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                   colSpan={7}
-                  count={usersData?.length || 0}
+                  count={filteredUsers.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
-                  showFirstButton
-                  showLastButton
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
+                  showFirstButton
+                  showLastButton
                 />
               </TableRow>
             </TableFooter>

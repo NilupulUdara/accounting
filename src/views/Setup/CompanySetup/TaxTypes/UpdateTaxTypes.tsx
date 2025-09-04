@@ -11,20 +11,28 @@ import {
   Select,
   MenuItem,
   SelectChangeEvent,
+  FormHelperText,
 } from "@mui/material";
 import theme from "../../../../theme";
 
-export default function TaxTypes() {
-  const [formData, setFormData] = useState({
+interface TaxFormData {
+  description: string;
+  defaultRate: string;
+  salesGlAccount: string;
+  purchasingGlAccount: string;
+}
+
+export default function UpdateTaxTypes() {
+  const [formData, setFormData] = useState<TaxFormData>({
     description: "",
     defaultRate: "",
     salesGlAccount: "",
     purchasingGlAccount: "",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const [errors, setErrors] = useState<Partial<TaxFormData>>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -32,17 +40,36 @@ export default function TaxTypes() {
     });
   };
 
-  const handleSelectChange = (e: SelectChangeEvent) => {
+  const handleSelectChange = (e: SelectChangeEvent<string>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
+  };
+
+  const validate = (): boolean => {
+    const newErrors: Partial<TaxFormData> = {};
+
+    if (!formData.description) newErrors.description = "Description is required";
+    if (!formData.defaultRate) {
+      newErrors.defaultRate = "Default rate is required";
+    } else if (isNaN(Number(formData.defaultRate)) || Number(formData.defaultRate) < 0) {
+      newErrors.defaultRate = "Default rate must be a positive number";
+    }
+    if (!formData.salesGlAccount) newErrors.salesGlAccount = "Sales GL Account is required";
+    if (!formData.purchasingGlAccount) newErrors.purchasingGlAccount = "Purchasing GL Account is required";
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = () => {
-    console.log("Submitted Tax Group:", formData);
-    // Add your API call here
+    if (validate()) {
+      console.log("Submitted Tax Group:", formData);
+      alert("Form submitted successfully!");
+    }
   };
 
   return (
@@ -68,6 +95,8 @@ export default function TaxTypes() {
             fullWidth
             value={formData.description}
             onChange={handleChange}
+            error={!!errors.description}
+            helperText={errors.description}
           />
 
           <TextField
@@ -78,9 +107,11 @@ export default function TaxTypes() {
             fullWidth
             value={formData.defaultRate}
             onChange={handleChange}
+            error={!!errors.defaultRate}
+            helperText={errors.defaultRate}
           />
 
-          <FormControl size="small" fullWidth>
+          <FormControl size="small" fullWidth error={!!errors.salesGlAccount}>
             <InputLabel>Sales GL Account</InputLabel>
             <Select
               name="salesGlAccount"
@@ -92,9 +123,10 @@ export default function TaxTypes() {
               <MenuItem value="4010">4010 - Services Revenue</MenuItem>
               <MenuItem value="4020">4020 - Other Income</MenuItem>
             </Select>
+            <FormHelperText>{errors.salesGlAccount}</FormHelperText>
           </FormControl>
 
-          <FormControl size="small" fullWidth>
+          <FormControl size="small" fullWidth error={!!errors.purchasingGlAccount}>
             <InputLabel>Purchasing GL Account</InputLabel>
             <Select
               name="purchasingGlAccount"
@@ -106,6 +138,7 @@ export default function TaxTypes() {
               <MenuItem value="5010">5010 - Freight Expenses</MenuItem>
               <MenuItem value="5020">5020 - Other Costs</MenuItem>
             </Select>
+            <FormHelperText>{errors.purchasingGlAccount}</FormHelperText>
           </FormControl>
         </Stack>
 

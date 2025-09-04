@@ -1,142 +1,109 @@
+import React, { useMemo, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import TableFooter from "@mui/material/TableFooter";
+import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
-import {
-  Box,
-  Button,
-  Stack,
-  TableFooter,
-  TablePagination,
-  Typography,
-  useMediaQuery,
-  Theme,
-  Checkbox,
-  FormControlLabel,
-} from "@mui/material";
-import { useMemo, useState, useEffect } from "react";
+import { Box, Stack, Button, Typography, Checkbox, FormControlLabel, useMediaQuery, Theme } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import theme from "../../../../theme";
 import Breadcrumb from "../../../../components/BreadCrumb";
 import PageTitle from "../../../../components/PageTitle";
-import theme from "../../../../theme";
 import SearchBar from "../../../../components/SearchBar";
 
-// Mock API function
-const getTaxGroups = async () => [
+// Mock API function for currency data
+const getCurrencies = async () => [
   {
     id: 1,
-    description: "Standard Tax",
-    taxExempt: "No",
-    inactive: false,
+    currencyAbbreviation: "USD",
+    currencySymbol: "$",
+    currencyName: "US Dollar",
+    hundredthsName: "Cents",
+    country: "United States",
+    autoExchangeRateUpdate: true,
   },
   {
     id: 2,
-    description: "Reduced Tax",
-    taxExempt: "Yes",
-    inactive: true,
+    currencyAbbreviation: "LKR",
+    currencySymbol: "Rs",
+    currencyName: "Sri Lankan Rupee",
+    hundredthsName: "Cents",
+    country: "Sri Lanka",
+    autoExchangeRateUpdate: false,
   },
   {
     id: 3,
-    description: "Standard Tax",
-    taxExempt: "No",
-    inactive: false,
-  },
-  {
-    id: 4,
-    description: "Reduced Tax",
-    taxExempt: "Yes",
-    inactive: true,
-  },
-  {
-    id: 5,
-    description: "Standard Tax",
-    taxExempt: "No",
-    inactive: false,
-  },
-  {
-    id: 6,
-    description: "Reduced Tax",
-    taxExempt: "Yes",
-    inactive: true,
-  },
-  {
-    id: 7,
-    description: "Standard Tax",
-    taxExempt: "No",
-    inactive: false,
-  },
-  {
-    id: 8,
-    description: "Reduced Tax",
-    taxExempt: "Yes",
-    inactive: true,
+    currencyAbbreviation: "EUR",
+    currencySymbol: "€",
+    currencyName: "Euro",
+    hundredthsName: "Cents",
+    country: "European Union",
+    autoExchangeRateUpdate: true,
   },
 ];
 
-export default function TaxGroupTable() {
+export default function CurrencyTable() {
+  const [currencies, setCurrencies] = useState<any[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [taxGroups, setTaxGroups] = useState<any[]>([]);
-  const [showInactive, setShowInactive] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(""); // search state
+  const [showAll, setShowAll] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
-  // Fetch data (simulate API)
-  useEffect(() => {
-    getTaxGroups().then((data) => setTaxGroups(data));
-  }, []);
+  // Fetch data
+  useState(() => {
+    getCurrencies().then((data) => setCurrencies(data));
+  });
 
-  // Filter data based on global checkbox & search query
+  // Filter based on autoExchangeRateUpdate and search
   const filteredData = useMemo(() => {
-    let data = showInactive ? taxGroups : taxGroups.filter((g) => !g.inactive);
+    let data = showAll ? currencies : currencies.filter((c) => c.autoExchangeRateUpdate);
 
     if (searchQuery.trim() !== "") {
       const lower = searchQuery.toLowerCase();
       data = data.filter(
-        (g) =>
-          g.description.toLowerCase().includes(lower) ||
-          g.taxExempt.toLowerCase().includes(lower)
+        (c) =>
+          c.currencyAbbreviation.toLowerCase().includes(lower) ||
+          c.currencyName.toLowerCase().includes(lower) ||
+          c.country.toLowerCase().includes(lower)
       );
     }
 
     return data;
-  }, [taxGroups, showInactive, searchQuery]);
+  }, [currencies, showAll, searchQuery]);
 
   const paginatedData = useMemo(() => {
     if (rowsPerPage === -1) return filteredData;
     return filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  }, [page, rowsPerPage, filteredData]);
+  }, [filteredData, page, rowsPerPage]);
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => setPage(newPage);
+  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => setPage(newPage);
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   const handleDelete = (id: number) => {
-    alert(`Delete tax group with id: ${id}`);
+    alert(`Delete currency with id: ${id}`);
   };
 
   const breadcrumbItems = [
     { title: "Home", href: "/home" },
-    { title: "Tax Groups" },
+    { title: "Currencies" },
   ];
 
   return (
     <Stack>
+      {/* Header */}
       <Box
         sx={{
           padding: theme.spacing(2),
@@ -150,7 +117,7 @@ export default function TaxGroupTable() {
         }}
       >
         <Box>
-          <PageTitle title="Tax Groups" />
+          <PageTitle title="Currency Setup" />
           <Breadcrumb breadcrumbs={breadcrumbItems} />
         </Box>
 
@@ -158,73 +125,73 @@ export default function TaxGroupTable() {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => navigate("/setup/companysetup/add-tax-groups")}
+            onClick={() => navigate("/bankingandgeneralledger/maintenance/add-currency")}
           >
-            Add Tax Groups
+            Add Currency
           </Button>
 
           <Button
             variant="outlined"
             startIcon={<ArrowBackIcon />}
-            onClick={() => navigate("/setup/companysetup")}
+            onClick={() => navigate("/bankingandgeneralledger/maintenance/")}
           >
             Back
           </Button>
         </Stack>
       </Box>
 
-      {/* Global checkbox & Search Bar */}
+      {/* Search & Filter */}
       <Stack
         direction={isMobile ? "column" : "row"}
         spacing={2}
         sx={{ px: 2, mb: 2, alignItems: "center", justifyContent: "space-between" }}
       >
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={showInactive}
-              onChange={(e) => setShowInactive(e.target.checked)}
-            />
-          }
-          label="Show Also Inactive"
-        />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder="Search by Abbreviation, Name, or Country" />
 
-        <Box sx={{ width: isMobile ? "100%" : "300px" }}>
-          <SearchBar
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            placeholder="Search Description or Tax Exempt"
-          />
-        </Box>
+        <FormControlLabel
+          control={<Checkbox checked={!showAll} onChange={(e) => setShowAll(!e.target.checked)} />}
+          label="Show Only Auto Exchange Rate Enabled"
+        />
       </Stack>
 
+      {/* Table */}
       <Stack sx={{ alignItems: "center" }}>
         <TableContainer
           component={Paper}
           elevation={2}
           sx={{ overflowX: "auto", maxWidth: isMobile ? "88vw" : "100%" }}
         >
-          <Table aria-label="tax groups table">
+          <Table aria-label="currencies table">
             <TableHead sx={{ backgroundColor: "var(--pallet-lighter-blue)" }}>
               <TableRow>
-                <TableCell>Description</TableCell>
-                <TableCell>Tax Exempt</TableCell>
+                <TableCell>Abbreviation</TableCell>
+                <TableCell>Symbol</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Hundredths Name</TableCell>
+                <TableCell>Country</TableCell>
+                <TableCell align="center">Auto Exchange Update</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {paginatedData.length > 0 ? (
-                paginatedData.map((group) => (
-                  <TableRow key={group.id} hover>
-                    <TableCell>{group.description}</TableCell>
-                    <TableCell>{group.taxExempt}</TableCell>
+                paginatedData.map((currency) => (
+                  <TableRow key={currency.id} hover>
+                    <TableCell>{currency.currencyAbbreviation}</TableCell>
+                    <TableCell>{currency.currencySymbol}</TableCell>
+                    <TableCell>{currency.currencyName}</TableCell>
+                    <TableCell>{currency.hundredthsName}</TableCell>
+                    <TableCell>{currency.country}</TableCell>
+                    <TableCell align="center">
+                      <Checkbox checked={currency.autoExchangeRateUpdate} disabled />
+                    </TableCell>
                     <TableCell align="center">
                       <Stack direction="row" spacing={1} justifyContent="center">
                         <Button
                           variant="contained"
                           size="small"
                           startIcon={<EditIcon />}
-                          onClick={() => navigate("/setup/companysetup/update-tax-groups")}
+                          onClick={() => navigate("/bankingandgeneralledger/maintenance/update-currency")}
                         >
                           Edit
                         </Button>
@@ -233,7 +200,7 @@ export default function TaxGroupTable() {
                           size="small"
                           color="error"
                           startIcon={<DeleteIcon />}
-                          onClick={() => handleDelete(group.id)}
+                          onClick={() => handleDelete(currency.id)}
                         >
                           Delete
                         </Button>
@@ -243,7 +210,7 @@ export default function TaxGroupTable() {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={3} align="center">
+                  <TableCell colSpan={7} align="center">
                     <Typography variant="body2">No Records Found</Typography>
                   </TableCell>
                 </TableRow>
@@ -253,7 +220,7 @@ export default function TaxGroupTable() {
               <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  colSpan={3}
+                  colSpan={7}
                   count={filteredData.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
