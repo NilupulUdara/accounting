@@ -51,7 +51,7 @@ interface CompanyFormData {
   roundCalculatedPrices: string;
   manufacturing: boolean;
   fixedAssets: boolean;
-  useDimensions: string;
+  useDimensions: boolean;
   uiShortName: boolean;
   uiPrintDialog: boolean;
   searchItems: boolean;
@@ -93,7 +93,7 @@ export default function CompanySetupForm() {
     roundCalculatedPrices: "",
     manufacturing: false,
     fixedAssets: false,
-    useDimensions: "1",
+    useDimensions: false,
     uiShortName: false,
     uiPrintDialog: false,
     searchItems: false,
@@ -543,7 +543,7 @@ export default function CompanySetupForm() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={formData.useDimensions === "1"}
+                    checked={formData.useDimensions}
                     onChange={handleChange}
                     name="useDimensions"
                   />

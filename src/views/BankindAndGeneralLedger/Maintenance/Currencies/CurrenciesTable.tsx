@@ -144,14 +144,22 @@ export default function CurrencyTable() {
       <Stack
         direction={isMobile ? "column" : "row"}
         spacing={2}
-        sx={{ px: 2, mb: 2, alignItems: "center", justifyContent: "space-between" }}
+        sx={{ px: 2, mb: 2, alignItems: "center", justifyContent: isMobile ? "flex-start" : "space-between" }}
       >
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder="Search by Abbreviation, Name, or Country" />
-
+        {/* Checkbox on left */}
         <FormControlLabel
           control={<Checkbox checked={!showAll} onChange={(e) => setShowAll(!e.target.checked)} />}
           label="Show Only Auto Exchange Rate Enabled"
         />
+
+        {/* SearchBar on right */}
+        <Box sx={{ ml: isMobile ? 0 : "auto" }}>
+          <SearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            placeholder="Search by Abbreviation, Name, or Country"
+          />
+        </Box>
       </Stack>
 
       {/* Table */}
