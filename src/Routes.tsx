@@ -71,10 +71,12 @@ import CreditStatusTable from "./views/Sales/Maintenance/CreditStatusSetup/Credi
 import AddCreditStatusForm from "./views/Sales/Maintenance/CreditStatusSetup/AddCreditStatusForm";
 import UpdateCreditStatusForm from "./views/Sales/Maintenance/CreditStatusSetup/UpdateCreditStatusForm";
 import AddManageCutomers from "./views/Sales/Maintenance/AddManageCustomers/AddManageCustomers";
-import GeneralSettings from "./views/Sales/Maintenance/AddManageCustomers/GeneralSettings";
 import AddSalesGroupsForm from "./views/Sales/Maintenance/SalesGroups/AddSalesGroupsForm";
 import UpdateSalesGroupsForm from "./views/Sales/Maintenance/SalesGroups/UpdateSalesGroupsForm";
 import SalesGroupsTable from "./views/Sales/Maintenance/SalesGroups/SalesGroupsTable";
+import Suppliers from "./views/Purchases/Maintenance/Suppliers/Suppliers";
+import GeneralSettingsForm from "./views/Sales/Maintenance/AddManageCustomers/GeneralSettingsForm";
+import SupplierGeneralSettingsForm from "./views/Purchases/Maintenance/Suppliers/SupplierGeneralSettingsForm";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -845,7 +847,7 @@ const AppRoutes = () => {
       />
       <Route
         path="/sales/maintenance/add-and-manage-customers/general-settings"
-        element={withLayout(MainLayout, GeneralSettings)}
+        element={withLayout(MainLayout, GeneralSettingsForm)}
       />
       <Route
         path="/sales/maintenance/add-and-manage-customers/contacts"
@@ -935,6 +937,14 @@ const AppRoutes = () => {
       <Route
         path="/purchase/maintenance"
         element={withLayout(MainLayout, PurchaseMaintenance)}
+      />
+      <Route
+        path="/purchase/maintenance/suppliers"
+        element={withLayout(MainLayout, Suppliers)}
+      />
+      <Route
+        path="/purchase/maintenance/suppliers/general-settings"
+        element={withLayout(MainLayout, SupplierGeneralSettingsForm)}
       />
 
       <Route

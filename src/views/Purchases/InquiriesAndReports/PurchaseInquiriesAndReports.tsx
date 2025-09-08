@@ -23,10 +23,10 @@ function PurchaseInquiriesAndReports() {
   const navigate = useNavigate();
 
   const allItems = [
-    { text: "PURCHASE ORDERS INQUIRY", change: +10, icon: <RequestQuoteIcon sx={{ fontSize: 40, color: "#1976d2" }} />, path: "/purchases/inquiriesandreports/purchase-orders-inquiry" },
-    { text: "SUPPLIER TRANSACTION INQUIRY", change: -5, icon: <ShoppingCartIcon sx={{ fontSize: 40, color: "#1976d2" }} />, path: "/purchases/inquiriesandreports/supplier-transaction-inquiry" },
-    { text: "SUPPLIER ALLOCATION INQUIRY", change: +8, icon: <ReceiptLongIcon sx={{ fontSize: 40, color: "#1976d2" }} />, path: "/purchases/inquiriesandreports/supplier-allocation-inquiry" },
-    { text: "SUPPLIER & PURCHASING REPORTS", change: 0, icon: <AssignmentIcon sx={{ fontSize: 40, color: "#1976d2" }} />, path: "/purches/inquiriesandreports/supplier-and-purchasing-reports" },
+    { text: "PURCHASE ORDERS INQUIRY", change: +10, icon: <RequestQuoteIcon sx={{ fontSize: 40, color: "#1976d2" }} />, path: "/purchase/inquiriesandreports/purchase-orders-inquiry" },
+    { text: "SUPPLIER TRANSACTION INQUIRY", change: -5, icon: <ShoppingCartIcon sx={{ fontSize: 40, color: "#1976d2" }} />, path: "/purchase/inquiriesandreports/supplier-transaction-inquiry" },
+    { text: "SUPPLIER ALLOCATION INQUIRY", change: +8, icon: <ReceiptLongIcon sx={{ fontSize: 40, color: "#1976d2" }} />, path: "/purchase/inquiriesandreports/supplier-allocation-inquiry" },
+    { text: "SUPPLIER & PURCHASING REPORTS", change: 0, icon: <AssignmentIcon sx={{ fontSize: 40, color: "#1976d2" }} />, path: "/purchase/inquiriesandreports/supplier-and-purchasing-reports" },
   ];
 
   const handleItemClick = (path, text) => {

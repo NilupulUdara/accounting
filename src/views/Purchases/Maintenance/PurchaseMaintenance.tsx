@@ -18,7 +18,7 @@ function PurchaseMaintenance() {
     { 
       text: "SUPPLIERS", 
       icon: <PersonAddIcon sx={{ fontSize: 40, color: "#1976d2" }} />, 
-      path: "/purchases/maintenance/suppliers",
+      path: "/purchase/maintenance/suppliers",
       change: +24
     },
   ];

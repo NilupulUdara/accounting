@@ -29,14 +29,10 @@ import theme from "../../../../theme";
 import SearchBar from "../../../../components/SearchBar";
 
 // Mock API function
-// Mock API function
 const getSalesGroupList = async () => [
-  { name: "Retail", status: "Active" },
-  { name: "Wholesale", status: "Active" },
-  { name: "Distributors", status: "Inactive" },
-  { name: "Online", status: "Active" },
-  { name: "Export", status: "Inactive" },
-  { name: "Corporate", status: "Active" },
+  { name: "Large", status: "Active" },
+  { name: "Small", status: "Active" },
+  { name: "Medium", status: "Inactive" },
 ];
 
 function SalesGroupsTable() {
