@@ -50,7 +50,7 @@ function LoginForm() {
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
       localStorage.setItem("token", data?.access_token);
       enqueueSnackbar("Welcome Back!", { variant: "success" });
-      navigate("/home");
+      navigate("/dashboard");
     },
     onError: () => {
       enqueueSnackbar(`Login Failed`, {

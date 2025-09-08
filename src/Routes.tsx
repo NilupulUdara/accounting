@@ -58,6 +58,20 @@ import AddFiscalYear from "./views/Setup/CompanySetup/FiscalYear/AddFiscalYear";
 import UpdateFiscalYear from "./views/Setup/CompanySetup/FiscalYear/UpdateFiscalYear";
 import AddCurrencies from "./views/BankindAndGeneralLedger/Maintenance/Currencies/AddCurrencies";
 import UpdateCurrencies from "./views/BankindAndGeneralLedger/Maintenance/Currencies/UpdateCurrencies";
+import AddSalesPerson from "./views/Sales/Maintenance/SalesPersons/AddSalesPersonForm";
+import UpdateSalesPerson from "./views/Sales/Maintenance/SalesPersons/UpdateSalesPersonForm";
+import SalesPersonTable from "./views/Sales/Maintenance/SalesPersons/SalesPersonTable";
+import AddSalesAreaForm from "./views/Sales/Maintenance/SalesAreas/AddSalesAreaForm";
+import UpdateSalesAreaForm from "./views/Sales/Maintenance/SalesAreas/UpdateSalesAreaForm";
+import SalesAreaTable from "./views/Sales/Maintenance/SalesAreas/SalesAreaTable";
+import SalesTypesTable from "./views/Sales/Maintenance/SalesTypes/SalesTypesTable";
+import AddSalesTypesForm from "./views/Sales/Maintenance/SalesTypes/AddSalesTypesForm";
+import UpdateSalesTypesForm from "./views/Sales/Maintenance/SalesTypes/UpdateSalesTypesForm";
+import CreditStatusTable from "./views/Sales/Maintenance/CreditStatusSetup/CreditStatusTable";
+import AddCreditStatusForm from "./views/Sales/Maintenance/CreditStatusSetup/AddCreditStatusForm";
+import UpdateCreditStatusForm from "./views/Sales/Maintenance/CreditStatusSetup/UpdateCreditStatusForm";
+import AddManageCutomers from "./views/Sales/Maintenance/AddManageCustomers/AddManageCustomers";
+import GeneralSettings from "./views/Sales/Maintenance/AddManageCustomers/GeneralSettings";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -822,7 +836,79 @@ const AppRoutes = () => {
         path="/sales/maintenance"
         element={withLayout(MainLayout, Maintenance)}
       />
+      <Route
+        path="/sales/maintenance/add-and-manage-customers"
+        element={withLayout(MainLayout, AddManageCutomers)}
+      />
+      <Route
+        path="/sales/maintenance/add-and-manage-customers/general-settings"
+        element={withLayout(MainLayout, GeneralSettings)}
+      />
+      <Route
+        path="/sales/maintenance/add-and-manage-customers/contacts"
+        element={withLayout(MainLayout, AddManageCutomers)}
+      />
+      <Route
+        path="/sales/maintenance/add-and-manage-customers/transactions"
+        element={withLayout(MainLayout, AddManageCutomers)}
+      />
+      <Route
+        path="/sales/maintenance/add-and-manage-customers/sales-orders"
+        element={withLayout(MainLayout, AddManageCutomers)}
+      />
+      <Route
+        path="/sales/maintenance/add-and-manage-customers/attachments"
+        element={withLayout(MainLayout, AddManageCutomers)}
+      />
 
+      <Route
+        path="/sales/maintenance/sales-persons"
+        element={withLayout(MainLayout, SalesPersonTable)}
+      />
+      <Route
+        path="/sales/maintenance/sales-persons/add-sales-person"
+        element={withLayout(MainLayout, AddSalesPerson)}
+      />
+      <Route
+        path="/sales/maintenance/sales-persons/update-sales-person"
+        element={withLayout(MainLayout, UpdateSalesPerson)}
+      /><Route
+        path="/sales/maintenance/sales-areas"
+        element={withLayout(MainLayout, SalesAreaTable)}
+      />
+      <Route
+        path="/sales/maintenance/sales-areas/add-sales-area"
+        element={withLayout(MainLayout, AddSalesAreaForm)}
+      />
+      <Route
+        path="/sales/maintenance/sales-areas/update-sales-area"
+        element={withLayout(MainLayout, UpdateSalesAreaForm)}
+      />
+      <Route
+        path="/sales/maintenance/sales-types/"
+        element={withLayout(MainLayout, SalesTypesTable)}
+      />
+      <Route
+        path="/sales/maintenance/sales-areas/add-sales-types"
+        element={withLayout(MainLayout, AddSalesTypesForm)}
+      />
+      <Route
+        path="/sales/maintenance/sales-areas/update-sales-types"
+        element={withLayout(MainLayout, UpdateSalesTypesForm)}
+      />
+      <Route
+        path="/sales/maintenance/credit-status-setup"
+        element={withLayout(MainLayout, CreditStatusTable)}
+      />
+      <Route
+        path="/sales/maintenance/credit-status-setup/add-credit-status"
+        element={withLayout(MainLayout, AddCreditStatusForm)}
+      />
+      <Route
+        path="/sales/maintenance/credit-status-setup/update-credit-status"
+        element={withLayout(MainLayout, UpdateCreditStatusForm)}
+      />
+      
 
       <Route
         path="/purchase/transactions"

@@ -22,7 +22,7 @@ function LoginPage() {
   }
 
   if (user) {
-    navigate("/home");
+    navigate("/dashboard");
   }
 
   return (
