@@ -72,6 +72,9 @@ import AddCreditStatusForm from "./views/Sales/Maintenance/CreditStatusSetup/Add
 import UpdateCreditStatusForm from "./views/Sales/Maintenance/CreditStatusSetup/UpdateCreditStatusForm";
 import AddManageCutomers from "./views/Sales/Maintenance/AddManageCustomers/AddManageCustomers";
 import GeneralSettings from "./views/Sales/Maintenance/AddManageCustomers/GeneralSettings";
+import AddSalesGroupsForm from "./views/Sales/Maintenance/SalesGroups/AddSalesGroupsForm";
+import UpdateSalesGroupsForm from "./views/Sales/Maintenance/SalesGroups/UpdateSalesGroupsForm";
+import SalesGroupsTable from "./views/Sales/Maintenance/SalesGroups/SalesGroupsTable";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -860,7 +863,18 @@ const AppRoutes = () => {
         path="/sales/maintenance/add-and-manage-customers/attachments"
         element={withLayout(MainLayout, AddManageCutomers)}
       />
-
+    <Route
+        path="/sales/maintenance/sales-groups"
+        element={withLayout(MainLayout, SalesGroupsTable)}
+      />
+      <Route
+        path="/sales/maintenance/sales-groups/add-sales-groups"
+        element={withLayout(MainLayout, AddSalesGroupsForm)}
+      />
+  <Route
+        path="/sales/maintenance/sales-groups/update-sales-groups"
+        element={withLayout(MainLayout, UpdateSalesGroupsForm)}
+      />
       <Route
         path="/sales/maintenance/sales-persons"
         element={withLayout(MainLayout, SalesPersonTable)}
