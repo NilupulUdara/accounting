@@ -14,6 +14,8 @@ import {
   Typography,
   useMediaQuery,
   Theme,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import { useMemo, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
@@ -63,7 +65,7 @@ const getUserList = async () => [
     email: "jane@example.com",
     role: "User",
     status: "Inactive",
-  },{
+  }, {
     id: 5,
     login: "john_doe",
     fullName: "John Doe",
@@ -80,7 +82,7 @@ const getUserList = async () => [
     email: "jane@example.com",
     role: "User",
     status: "Inactive",
-  },{
+  }, {
     id: 7,
     login: "john_doe",
     fullName: "John Doe",
@@ -97,7 +99,7 @@ const getUserList = async () => [
     email: "jane@example.com",
     role: "User",
     status: "Inactive",
-  },{
+  }, {
     id: 9,
     login: "john_doe",
     fullName: "John Doe",
@@ -120,6 +122,7 @@ const getUserList = async () => [
 function UserManagementTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [showInactive, setShowInactive] = useState(false); // global checkbox
   const [searchQuery, setSearchQuery] = useState("");
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
   const navigate = useNavigate();
@@ -131,17 +134,27 @@ function UserManagementTable() {
 
   const filteredUsers = useMemo(() => {
     if (!usersData) return [];
-    if (!searchQuery.trim()) return usersData;
-    const lowerQuery = searchQuery.toLowerCase();
-    return usersData.filter(
-      (user) =>
-        user.fullName.toLowerCase().includes(lowerQuery) ||
-        user.department.toLowerCase().includes(lowerQuery) ||
-        user.email.toLowerCase().includes(lowerQuery) ||
-        user.role.toLowerCase().includes(lowerQuery) ||
-        user.status.toLowerCase().includes(lowerQuery)
-    );
-  }, [usersData, searchQuery]);
+
+    let filtered = usersData;
+
+    if (!showInactive) {
+      filtered = filtered.filter((item) => item.status === "Active");
+    }
+
+    if (!searchQuery.trim()) {
+      const lowerQuery = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        (user) =>
+          user.fullName.toLowerCase().includes(lowerQuery) ||
+          user.department.toLowerCase().includes(lowerQuery) ||
+          user.email.toLowerCase().includes(lowerQuery) ||
+          user.role.toLowerCase().includes(lowerQuery) ||
+          user.status.toLowerCase().includes(lowerQuery)
+      );
+    }
+    return filtered;
+    
+  }, [usersData, searchQuery, showInactive]);
 
   const paginatedUsersData = useMemo(() => {
     if (rowsPerPage === -1) return filteredUsers;
@@ -202,9 +215,32 @@ function UserManagementTable() {
       </Box>
 
       {/* Search Bar */}
-      <Box sx={{ display: "flex", justifyContent: "flex-end", px: 2, mb: 2, width: "100%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          px: 2,
+          mb: 2,
+          width: "100%",
+          alignItems: "center",
+        }}
+      >
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={showInactive}
+              onChange={(e) => setShowInactive(e.target.checked)}
+            />
+          }
+          label="Show also Inactive"
+        />
+
         <Box sx={{ width: isMobile ? "100%" : "300px" }}>
-          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder="Search..." />
+          <SearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            placeholder="Search..."
+          />
         </Box>
       </Box>
 

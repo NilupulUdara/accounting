@@ -171,7 +171,7 @@ function SalesGroupsTable() {
             <TableHead sx={{ backgroundColor: "var(--pallet-lighter-blue)" }}>
               <TableRow>
                 <TableCell>ID</TableCell>
-                <TableCell>Name</TableCell>
+                <TableCell>Group Name</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>

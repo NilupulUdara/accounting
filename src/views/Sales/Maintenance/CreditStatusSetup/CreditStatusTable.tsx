@@ -30,9 +30,10 @@ import theme from "../../../../theme";
 
 // Mock API function for Credit Status
 const getCreditStatusList = async () => [
-  { id: 1, description: "Standard", disallowInvoices: false, status: "Active" },
-  { id: 2, description: "Blocked", disallowInvoices: true, status: "Inactive" },
-  { id: 3, description: "Limited", disallowInvoices: false, status: "Active" },
+  { id: 1, description: "Good history", disallowInvoices: true, status: "Active" },
+  { id: 2, description: "Blocked", disallowInvoices: false, status: "Inactive" },
+  { id: 3, description: "Limited", disallowInvoices: false, status: "Inctive" },
+  { id: 4, description: "Good History", disallowInvoices: true, status: "Active" },
 ];
 
 function CreditStatusTable() {
@@ -62,7 +63,7 @@ function CreditStatusTable() {
       filtered = filtered.filter(
         (item) =>
           item.description.toLowerCase().includes(lowerQuery) ||
-          (item.disallowInvoices ? "yes" : "no").includes(lowerQuery)
+          (item.disallowInvoices ? "Invoice Ok" : "No Invoicing").includes(lowerQuery)
       );
     }
 
@@ -181,7 +182,7 @@ function CreditStatusTable() {
                   <TableRow key={item.id} hover>
                     <TableCell>{page * rowsPerPage + index + 1}</TableCell>
                     <TableCell>{item.description}</TableCell>
-                    <TableCell>{item.disallowInvoices ? "Yes" : "No"}</TableCell>
+                    <TableCell>{item.disallowInvoices ? "Invoice Ok" : "No Invoicing"}</TableCell>
                     <TableCell align="center">
                       <Stack direction="row" spacing={1} justifyContent="center">
                         <Button

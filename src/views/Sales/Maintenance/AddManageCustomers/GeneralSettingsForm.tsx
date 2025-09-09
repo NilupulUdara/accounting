@@ -304,7 +304,7 @@ export default function GeneralSettingsForm() {
             fullWidth
             onClick={handleSubmit}
           >
-            Save
+            Add New Customer
           </Button>
         </Box>
       </Box>

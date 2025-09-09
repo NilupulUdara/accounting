@@ -31,7 +31,7 @@ export default function AddCreditStatusForm() {
   const [errors, setErrors] = useState<Partial<CreditStatusFormData>>({});
 
   const muiTheme = useTheme();
-    const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

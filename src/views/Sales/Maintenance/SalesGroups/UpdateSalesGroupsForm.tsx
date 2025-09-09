@@ -94,7 +94,7 @@ export default function UpdateSalesGroupsForm() {
             sx={{ backgroundColor: "var(--pallet-blue)" }}
             onClick={handleSubmit}
           >
-            Add New
+            Update
           </Button>
         </Box>
       </Paper>

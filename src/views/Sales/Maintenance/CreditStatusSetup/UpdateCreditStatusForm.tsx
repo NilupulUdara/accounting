@@ -12,6 +12,8 @@ import {
   MenuItem,
   FormHelperText,
   SelectChangeEvent,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import theme from "../../../../theme";
 
@@ -27,6 +29,9 @@ export default function UpdateCreditStatusForm() {
   });
 
   const [errors, setErrors] = useState<Partial<CreditStatusFormData>>({});
+
+  const muiTheme = useTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -62,7 +67,7 @@ export default function UpdateCreditStatusForm() {
   };
 
   return (
-    <Stack alignItems="center" sx={{ mt: 4 }}>
+    <Stack alignItems="center" sx={{ mt: 4, px: isMobile ? 2 : 0 }}>
       <Paper
         sx={{
           p: theme.spacing(3),
@@ -72,7 +77,7 @@ export default function UpdateCreditStatusForm() {
           borderRadius: 2,
         }}
       >
-        <Typography variant="h6" sx={{ mb: 3 }}>
+        <Typography variant="h6" sx={{ mb: 3, textAlign: isMobile ? "center" : "left" }}>
           Credit Status Setup
         </Typography>
 
@@ -103,11 +108,12 @@ export default function UpdateCreditStatusForm() {
           </FormControl>
         </Stack>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3, flexDirection: isMobile ? "column" : "row", gap: isMobile ? 2 : 0, }}>
           <Button onClick={() => window.history.back()}>Back</Button>
 
           <Button
             variant="contained"
+            fullWidth={isMobile}
             sx={{ backgroundColor: "var(--pallet-blue)" }}
             onClick={handleSubmit}
           >

@@ -12,6 +12,8 @@ import {
   Paper,
   FormHelperText,
   SelectChangeEvent,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import theme from "../../../../theme";
 
@@ -46,6 +48,9 @@ export default function UpdateUserForm() {
   });
 
   const [errors, setErrors] = useState<Partial<UserFormData>>({});
+
+  const muiTheme = useTheme();
+    const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -99,7 +104,7 @@ export default function UpdateUserForm() {
   };
 
   return (
-    <Stack alignItems="center" sx={{ mt: 4 }}>
+    <Stack alignItems="center" sx={{ mt: 4, px: isMobile ? 2 : 0 }}>
       <Paper
         sx={{
           p: theme.spacing(3),
@@ -109,7 +114,7 @@ export default function UpdateUserForm() {
           borderRadius: 2,
         }}
       >
-        <Typography variant="h6" sx={{ mb: 3 }}>
+        <Typography variant="h6" sx={{ mb: 3, textAlign: isMobile ? "center" : "left" }}>
           User Setup
         </Typography>
 
@@ -243,11 +248,12 @@ export default function UpdateUserForm() {
           </FormControl>
         </Stack>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3, flexDirection: isMobile ? "column" : "row", gap: isMobile ? 2 : 0, }}>
           <Button onClick={() => window.history.back()}>Back</Button>
 
           <Button
             variant="contained"
+            fullWidth={isMobile}
             sx={{ backgroundColor: "var(--pallet-blue)" }}
             onClick={handleSubmit}
           >

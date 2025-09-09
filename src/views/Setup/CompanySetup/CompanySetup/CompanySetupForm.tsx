@@ -16,8 +16,8 @@ import {
   Grid,
   FormHelperText,
 } from "@mui/material";
-import theme from "../../../theme";
-import DateRangePicker from "../../../components/DateRangePicker";
+import theme from "../../../../theme";
+import DateRangePicker from "../../../../components/DateRangePicker";
 import { useForm } from "react-hook-form";
 
 interface CompanyFormData {

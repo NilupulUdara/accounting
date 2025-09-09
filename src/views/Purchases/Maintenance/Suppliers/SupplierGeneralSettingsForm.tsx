@@ -370,7 +370,7 @@ export default function SupplierGeneralSettingsForm() {
             fullWidth
             onClick={handleSubmit}
           >
-            Save
+            Add New Supplier Details
           </Button>
         </Box>
       </Box>

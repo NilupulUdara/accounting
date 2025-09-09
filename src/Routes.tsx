@@ -35,7 +35,7 @@ import CompanySetup from "./views/Setup/CompanySetup/CompanySetup";
 import Miscellaneous from "./views/Setup/Miscellaneous/Miscellaneous";
 import FixedAssestsMaintenance from "./views/FixedAssets/Maintenance/FixedAssestsMaintenance";
 import FixedAssestsInquiriesAndReports from "./views/FixedAssets/InquiriesAndReports/FixedAssestsInquiriesAndReports";
-import CompanySetupForm from "./views/Setup/CompanySetup/CompanySetupForm";
+import CompanySetupForm from "./views/Setup/CompanySetup/CompanySetup/CompanySetupForm";
 import AddUserForm from "./views/Setup/CompanySetup/User/AddUserForm";
 import UserManagementTable from "./views/Setup/CompanySetup/User/UserManagementTable";
 import FiscalYear from "./views/Setup/CompanySetup/FiscalYear/AddFiscalYear";
