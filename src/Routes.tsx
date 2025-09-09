@@ -85,6 +85,9 @@ import ItemsGeneralSettingsForm from "./views/ItemsAndInventory/Maintenance/Item
 import InventoryLocationTable from "./views/ItemsAndInventory/Maintenance/InventoryLocations/InventoryLocationTable";
 import AddInventoryLocationForm from "./views/ItemsAndInventory/Maintenance/InventoryLocations/AddInventoryLocationsForm";
 import UpdateInventoryLocationForm from "./views/ItemsAndInventory/Maintenance/InventoryLocations/UpdateInventoryLocationsForm";
+import ItemCategoriesTable from "./views/ItemsAndInventory/Maintenance/ItemCategories/ItemCategoriesTable";
+import AddItemCategoriesForm from "./views/ItemsAndInventory/Maintenance/ItemCategories/AddItemCategoriesForm";
+import UpdateItemCategoriesForm from "./views/ItemsAndInventory/Maintenance/ItemCategories/UpdateItemCategoriesForm";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -1004,6 +1007,18 @@ const AppRoutes = () => {
       <Route
         path="/itemsandinventory/maintenance/update-inventory-location"
         element={withLayout(MainLayout, UpdateInventoryLocationForm)}
+      />
+      <Route
+        path="/itemsandinventory/maintenance/item-categories"
+        element={withLayout(MainLayout, ItemCategoriesTable)}
+      />
+      <Route
+        path="/itemsandinventory/maintenance/add-item-categories"
+        element={withLayout(MainLayout, AddItemCategoriesForm)}
+      />
+      <Route
+        path="/itemsandinventory/maintenance/update-item-categories"
+        element={withLayout(MainLayout, UpdateItemCategoriesForm)}
       />
 
       <Route

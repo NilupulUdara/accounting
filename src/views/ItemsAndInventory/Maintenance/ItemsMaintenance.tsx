@@ -30,7 +30,7 @@ function ItemsMaintenance() {
       path: "/itemsandinventory/maintenance/items"
     },
     {
-      text: "FOReEIGN ITEM CODES",
+      text: "FOREIGN ITEM CODES",
       icon: <StoreIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
       change: +24,
       path: "/itemsandinventory/maintenance/forign-item-codes"

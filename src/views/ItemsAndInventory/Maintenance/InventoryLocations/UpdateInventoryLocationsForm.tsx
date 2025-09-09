@@ -83,7 +83,7 @@ export default function UpdateInventoryLocationForm() {
         }}
       >
         <Typography variant="h6" sx={{ mb: 3, textAlign: isMobile ? "center" : "left" }}>
-          Add Inventory Location
+          Update Inventory Location
         </Typography>
 
         <Stack spacing={2}>
