@@ -110,18 +110,18 @@ const UnderDevelopment = React.lazy(
 
 //sustainability apps
 //chemical management
-const ChemicalRequestTable = React.lazy(
-  () => import("./views/ChemicalMng/ChemicalRequestTable")
-);
-const ChemicalPurchaseInventoryTable = React.lazy(
-  () => import("./views/ChemicalMng/ChemicalPurchaseInventoryTable")
-);
-const ChemicalTransactionTable = React.lazy(
-  () => import("./views/ChemicalMng/TransactionTable")
-);
-const ChemicalDashboard = React.lazy(
-  () => import("./views/ChemicalMng/Dashboard")
-);
+// const ChemicalRequestTable = React.lazy(
+//   () => import("./views/ChemicalMng/ChemicalRequestTable")
+// );
+// const ChemicalPurchaseInventoryTable = React.lazy(
+//   () => import("./views/ChemicalMng/ChemicalPurchaseInventoryTable")
+// );
+// const ChemicalTransactionTable = React.lazy(
+//   () => import("./views/ChemicalMng/TransactionTable")
+// );
+// const ChemicalDashboard = React.lazy(
+//   () => import("./views/ChemicalMng/Dashboard")
+// );
 
 //health and safety apps
 //document
@@ -418,36 +418,7 @@ const AppRoutes = () => {
         /> */}
 
         {/* sustainability apps */}
-        {/* chemical management */}
-        {/* <Route
-          path="/chemical-mng/dashboard"
-          element={withLayout(
-            MainLayout,
-            ChemicalDashboard,
-            !userPermissionObject?.[
-            PermissionKeys.CHEMICAL_MNG_DASHBOARD_VIEW
-            ]
-          )}
-        />
-        <Route
-          path="/chemical-mng/chemical-requests"
-          element={withLayout(MainLayout, ChemicalRequestTable)}
-        />
-        <Route
-          path="/chemical-mng/purchase-inventory"
-          element={withLayout(MainLayout, ChemicalPurchaseInventoryTable)}
-        />
-        <Route
-          path="/chemical-mng/transaction"
-          element={withLayout(MainLayout, ChemicalTransactionTable)}
-        />
-        <Route
-          path="/chemical-mng/assigned-tasks"
-          element={withLayout(MainLayout, () => (
-            <ChemicalRequestTable isAssignedTasks={true} />
-
-          ))}
-        /> */}
+        
 
         {/* document */}
         <Route
