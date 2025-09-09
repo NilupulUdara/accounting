@@ -114,7 +114,7 @@ function UnitsOfMeasureTable() {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => navigate("/itemsandinventory/maintenance/add-units-of-measure")}
+            onClick={() => navigate("/itemsandinventory/maintenance/units-of-measure/add-units-of-measure")}
           >
             Add Unit
           </Button>
@@ -188,7 +188,7 @@ function UnitsOfMeasureTable() {
                           size="small"
                           startIcon={<EditIcon />}
                           onClick={() => navigate(
-                            "/itemsandinventory/maintenance/update-units-of-measure"
+                            "/itemsandinventory/maintenance/units-of-measure/update-units-of-measure"
                             // `/inventory/units-of-measure/edit/${item.id}`
                         )}
                         >
