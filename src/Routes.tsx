@@ -77,6 +77,9 @@ import SalesGroupsTable from "./views/Sales/Maintenance/SalesGroups/SalesGroupsT
 import Suppliers from "./views/Purchases/Maintenance/Suppliers/Suppliers";
 import GeneralSettingsForm from "./views/Sales/Maintenance/AddManageCustomers/GeneralSettingsForm";
 import SupplierGeneralSettingsForm from "./views/Purchases/Maintenance/Suppliers/SupplierGeneralSettingsForm";
+import UnitsOfMeasureTable from "./views/ItemsAndInventory/Maintenance/UnitsOfMeasure/UnitsOfMeasureTable";
+import AddUnitsOfMeasureForm from "./views/ItemsAndInventory/Maintenance/UnitsOfMeasure/AddUnitsOfMeasureForm";
+import UpdateUnitsOfMeasureForm from "./views/ItemsAndInventory/Maintenance/UnitsOfMeasure/UpdateUnitsOfMeasureForm";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -959,6 +962,19 @@ const AppRoutes = () => {
         path="/itemsandinventory/maintenance"
         element={withLayout(MainLayout, ItemsMaintenance)}
       />
+      <Route
+        path="/itemsandinventory/maintenance/units-of-measure"
+        element={withLayout(MainLayout, UnitsOfMeasureTable)}
+      />
+      <Route
+        path="/itemsandinventory/maintenance/add-units-of-measure"
+        element={withLayout(MainLayout, AddUnitsOfMeasureForm)}
+      />
+      <Route
+        path="/itemsandinventory/maintenance/update-units-of-measure"
+        element={withLayout(MainLayout, UpdateUnitsOfMeasureForm)}
+      />
+
       <Route
         path="/itemsandinventory/pricingandcosts"
         element={withLayout(MainLayout, ItemsPricingAndCosts)}

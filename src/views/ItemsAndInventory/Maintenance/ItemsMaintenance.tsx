@@ -24,13 +24,13 @@ function ItemsMaintenance() {
 
   const allItems = [
     {
-      text: "Items",
+      text: "ITEMS",
       icon: <PersonAddIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
       change: +24,
       path: "/itemsandinventory/maintenance/items"
     },
     {
-      text: "FORIGN ITEM CODES",
+      text: "FOReEIGN ITEM CODES",
       icon: <StoreIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
       change: +24,
       path: "/itemsandinventory/maintenance/forign-item-codes"
@@ -54,10 +54,10 @@ function ItemsMaintenance() {
       path: "/itemsandinventory/maintenance/inventory-locations"
     },
     {
-      text: "UNITES OF MEASURE",
+      text: "UNITS OF MEASURE",
       icon: <PersonIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
       change: +24,
-      path: "/itemsandinventory/maintenance/unites-of-measure"
+      path: "/itemsandinventory/maintenance/units-of-measure"
     },
     {
       text: "REORDER LEVELS",
