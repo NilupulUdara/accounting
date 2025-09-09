@@ -195,7 +195,10 @@ function SalesAreaTable() {
                           size="small"
                           startIcon={<EditIcon />}
                           onClick={() =>
-                            navigate(`/sales/maintenance/sales-areas/update-sales-area/${area.id}`)
+                            navigate(
+                              "/sales/maintenance/sales-areas/update-sales-area"
+                              // `/sales/maintenance/sales-areas/update-sales-area/${area.id}`
+                              )
                           }
                         >
                           Edit

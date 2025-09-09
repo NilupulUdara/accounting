@@ -190,7 +190,8 @@ function SalesGroupsTable() {
                           startIcon={<EditIcon />}
                           onClick={() =>
                             navigate(
-                              `/sales/maintenance/sales-groups/update-sales-group/${page * rowsPerPage + index}`
+                              "/sales/maintenance/sales-groups/update-sales-groups"
+                              // `/sales/maintenance/sales-groups/update-sales-group/${page * rowsPerPage + index}`
                             )
                           }
                         >
