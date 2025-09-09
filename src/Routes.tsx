@@ -82,6 +82,9 @@ import AddUnitsOfMeasureForm from "./views/ItemsAndInventory/Maintenance/UnitsOf
 import UpdateUnitsOfMeasureForm from "./views/ItemsAndInventory/Maintenance/UnitsOfMeasure/UpdateUnitsOfMeasureForm";
 import Items from "./views/ItemsAndInventory/Maintenance/Items/Items";
 import ItemsGeneralSettingsForm from "./views/ItemsAndInventory/Maintenance/Items/ItemsGeneralSettingsForm";
+import InventoryLocationTable from "./views/ItemsAndInventory/Maintenance/InventoryLocations/InventoryLocationTable";
+import AddInventoryLocationForm from "./views/ItemsAndInventory/Maintenance/InventoryLocations/AddInventoryLocationsForm";
+import UpdateInventoryLocationForm from "./views/ItemsAndInventory/Maintenance/InventoryLocations/UpdateInventoryLocationsForm";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -870,7 +873,7 @@ const AppRoutes = () => {
         path="/sales/maintenance/add-and-manage-customers/attachments"
         element={withLayout(MainLayout, AddManageCutomers)}
       />
-    <Route
+      <Route
         path="/sales/maintenance/sales-groups"
         element={withLayout(MainLayout, SalesGroupsTable)}
       />
@@ -878,7 +881,7 @@ const AppRoutes = () => {
         path="/sales/maintenance/sales-groups/add-sales-groups"
         element={withLayout(MainLayout, AddSalesGroupsForm)}
       />
-  <Route
+      <Route
         path="/sales/maintenance/sales-groups/update-sales-groups"
         element={withLayout(MainLayout, UpdateSalesGroupsForm)}
       />
@@ -929,7 +932,7 @@ const AppRoutes = () => {
         path="/sales/maintenance/credit-status-setup/update-credit-status"
         element={withLayout(MainLayout, UpdateCreditStatusForm)}
       />
-      
+
 
       <Route
         path="/purchase/transactions"
@@ -988,6 +991,19 @@ const AppRoutes = () => {
       <Route
         path="/itemsandinventory/maintenance/update-units-of-measure"
         element={withLayout(MainLayout, UpdateUnitsOfMeasureForm)}
+      />
+
+      <Route
+        path="/itemsandinventory/maintenance/inventory-locations"
+        element={withLayout(MainLayout, InventoryLocationTable)}
+      />
+      <Route
+        path="/itemsandinventory/maintenance/add-inventory-location"
+        element={withLayout(MainLayout, AddInventoryLocationForm)}
+      />
+      <Route
+        path="/itemsandinventory/maintenance/update-inventory-location"
+        element={withLayout(MainLayout, UpdateInventoryLocationForm)}
       />
 
       <Route
@@ -1088,7 +1104,7 @@ const AppRoutes = () => {
         path="setup/companysetup/edit-access-setup"
         element={withLayout(MainLayout, UpdateUserAccessForm)}
       />
-      
+
       <Route
         path="/setup/companysetup/fiscal-years"
         element={withLayout(MainLayout, FiscalYearTable)}
