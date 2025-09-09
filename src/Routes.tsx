@@ -146,19 +146,6 @@ const HazardRiskTable = React.lazy(
   () => import("./views/HazardAndRisk/HazardRiskTable")
 );
 
-//accident and incident
-const AccidentTable = React.lazy(
-  () => import("./views/AccidentAndIncident/AccidentTable")
-);
-
-const IncidentTable = React.lazy(
-  () => import("./views/AccidentAndIncident/IncidentTable")
-);
-
-const AccidentAndIncidentDashboard = React.lazy(
-  () => import("./views/AccidentAndIncident/AccidentAndIncidentDashBoard")
-);
-
 //Occupational Health
 
 //Dashboard
@@ -337,7 +324,7 @@ const AppRoutes = () => {
         />
 
         {/* Audit & Inspection */}
-        <Route
+        {/* <Route
           path="/input-fields/autocomplete"
           element={withLayout(
             MainLayout,
@@ -391,13 +378,13 @@ const AppRoutes = () => {
           path="/audit-inspection/calendar"
           element={withLayout(
             MainLayout,
-            AuditCalendar
+            AuditCalendar */}
             // !userPermissionObject?.[
             //   PermissionKeys.AUDIT_INSPECTION_CALENDAR_VIEW
             // ]
-          )}
-        />
-        <Route
+          {/* )}
+        /> */}
+        {/* <Route
           path="/audit-inspection/internal-audit/form-builder"
           element={withLayout(
             MainLayout,
@@ -423,16 +410,16 @@ const AppRoutes = () => {
             MainLayout,
             () => (
               <UnderDevelopment pageName="Audit & Inspection > External Audit" />
-            )
+            ) */}
             // !userPermissionObject?.[
             //   PermissionKeys.AUDIT_INSPECTION_EXTERNAL_AUDIT_QUEUE_VIEW
             // ]
-          )}
-        />
+          {/* )}
+        /> */}
 
         {/* sustainability apps */}
         {/* chemical management */}
-        <Route
+        {/* <Route
           path="/chemical-mng/dashboard"
           element={withLayout(
             MainLayout,
@@ -460,7 +447,7 @@ const AppRoutes = () => {
             <ChemicalRequestTable isAssignedTasks={true} />
 
           ))}
-        />
+        /> */}
 
         {/* document */}
         <Route
@@ -502,92 +489,6 @@ const AppRoutes = () => {
             ]
           )}
         />
-        {/* Accident & Incident */}
-        <Route
-          path="/accident-incident/dashboard"
-          element={withLayout(
-            MainLayout,
-            AccidentAndIncidentDashboard,
-            !userPermissionObject?.[
-            PermissionKeys.INCIDENT_ACCIDENT_DASHBOARD_VIEW
-            ]
-          )}
-        />
-        <Route
-          path="/accident-incident/register/accident-register"
-          element={withLayout(
-            MainLayout,
-            () => {
-              return <AccidentTable isAssignedTasks={false} />;
-            },
-            !userPermissionObject?.[
-            PermissionKeys.INCIDENT_ACCIDENT_REGISTER_ACCIDENT_VIEW
-            ]
-          )}
-        />
-        <Route
-          path="/accident-incident/register/incident-register"
-          element={withLayout(
-            MainLayout,
-            () => {
-              return <IncidentTable isAssignedTasks={false} />;
-            },
-            !userPermissionObject?.[
-            PermissionKeys.INCIDENT_ACCIDENT_REGISTER_INCIDENT_VIEW
-            ]
-          )}
-        />
-        <Route
-          path="/accident-incident/register/corrective-action"
-          element={withLayout(
-            MainLayout,
-            () => (
-              <UnderDevelopment pageName="Accident & Incident > Corrective Action" />
-            )
-            // !userPermissionObject?.[
-            //   PermissionKeys.INCIDENT_ACCIDENT_CORRECTIVE_ACTION_VIEW
-            // ]
-          )}
-        />
-        {/* Assigned Tasks */}
-        <Route
-          path="/accident-incident/assigned-tasks/accident-assigned"
-          element={withLayout(
-            MainLayout,
-            () => {
-              return <AccidentTable isAssignedTasks={true} />;
-            },
-            !userPermissionObject?.[
-            PermissionKeys.INCIDENT_ACCIDENT_ASSIGNED_TASKS_ACCIDENT_VIEW
-            ]
-          )}
-        />
-        <Route
-          path="/accident-incident/assigned-tasks/incident-assigned"
-          element={withLayout(
-            MainLayout,
-            () => {
-              return <IncidentTable isAssignedTasks={true} />;
-            },
-            !userPermissionObject?.[
-            PermissionKeys.INCIDENT_ACCIDENT_ASSIGNED_TASKS_INCIDENT_VIEW
-            ]
-          )}
-        />
-        <Route
-          path="/accident-incident/assigned-tasks/corrective-action"
-          element={withLayout(
-            MainLayout,
-            () => (
-              <UnderDevelopment pageName="Assigned Tasks > Corrective Action" />
-            )
-            // !userPermissionObject?.[
-            //   PermissionKeys
-            //     .INCIDENT_ACCIDENT_ASSIGNED_TASKS_CORRECTIVE_ACTION_VIEW
-            // ]
-          )}
-        />
-
         {/* Occupational health */}
         {/* Dashboard */}
         <Route

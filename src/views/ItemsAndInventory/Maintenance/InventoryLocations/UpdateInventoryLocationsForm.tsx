@@ -86,7 +86,7 @@ export default function UpdateInventoryLocationForm() {
           Update Inventory Location
         </Typography>
 
-        <Stack spacing={2}>
+        <Stack spacing={0.5}>
           <TextField
             label="Location Code"
             name="locationCode"
