@@ -27,13 +27,13 @@ function ManufacturingMaintenance() {
       text: "BILLS of MATERIALS",
       icon: <PersonAddIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
       change: +24,
-      path: "/manufactoring/maintenance/bils-of-materials"
+      path: "/manufacturing/maintenance/bils-of-materials"
     },
     {
       text: "WORK CENTERS",
       icon: <StoreIcon sx={{ fontSize: 40, color: "#1976d2" }} />,
       change: +24,
-      path: "/manufactoring/maintenance/work-centres"
+      path: "/manufacturing/maintenance/work-centres"
     },
 
   ];

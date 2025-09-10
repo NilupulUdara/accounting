@@ -88,6 +88,15 @@ import UpdateInventoryLocationForm from "./views/ItemsAndInventory/Maintenance/I
 import ItemCategoriesTable from "./views/ItemsAndInventory/Maintenance/ItemCategories/ItemCategoriesTable";
 import AddItemCategoriesForm from "./views/ItemsAndInventory/Maintenance/ItemCategories/AddItemCategoriesForm";
 import UpdateItemCategoriesForm from "./views/ItemsAndInventory/Maintenance/ItemCategories/UpdateItemCategoriesForm";
+import WorkCentresTable from "./views/Manufacturing/Maintenance/WorkCenter/WorkCentresTable";
+import AddWorkCentresForm from "./views/Manufacturing/Maintenance/WorkCenter/AddWorkCentresForm";
+import UpdateWorkCentresForm from "./views/Manufacturing/Maintenance/WorkCenter/UpdateWorkCentresForm";
+import BankAccountsTable from "./views/BankindAndGeneralLedger/Maintenance/BankAccounts/BankAccountsTable";
+import AddBankAccountsForm from "./views/BankindAndGeneralLedger/Maintenance/BankAccounts/AddBankAccountsForm";
+import UpdateBankAccountsForm from "./views/BankindAndGeneralLedger/Maintenance/BankAccounts/UpdateBankAccountsForm";
+import AddQuickEntriesForm from "./views/BankindAndGeneralLedger/Maintenance/QuickEntries/AddQuickEntriesForm";
+import UpdateQuickEntriesForm from "./views/BankindAndGeneralLedger/Maintenance/QuickEntries/UpdateQuickEntriesForm";
+import QuickEntriesTable from "./views/BankindAndGeneralLedger/Maintenance/QuickEntries/QuickEntriesTable";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -910,6 +919,18 @@ const AppRoutes = () => {
         path="/manufacturing/maintenance"
         element={withLayout(MainLayout, ManufacturingMaintenance)}
       />
+      <Route
+        path="/manufacturing/maintenance/work-centres"
+        element={withLayout(MainLayout, WorkCentresTable)}
+      />
+      <Route
+        path="/manufacturing/maintenance/add-work-centres"
+        element={withLayout(MainLayout, AddWorkCentresForm)}
+      />
+      <Route
+        path="/manufacturing/maintenance/update-work-centres"
+        element={withLayout(MainLayout, UpdateWorkCentresForm)}
+      />
 
 
       <Route
@@ -951,6 +972,18 @@ const AppRoutes = () => {
         element={withLayout(MainLayout, BankingMaintenance)}
       />
       <Route
+        path="/bankingandgeneralledger/maintenance/bank-accounts"
+        element={withLayout(MainLayout, BankAccountsTable)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/add-bank-accounts"
+        element={withLayout(MainLayout, AddBankAccountsForm)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/update-bank-accounts"
+        element={withLayout(MainLayout, UpdateBankAccountsForm)}
+      />
+      <Route
         path="/bankingandgeneralledger/maintenance/currencies"
         element={withLayout(MainLayout, CurrenciesTable)}
       />
@@ -961,6 +994,18 @@ const AppRoutes = () => {
       <Route
         path="/bankingandgeneralledger/maintenance/update-currency"
         element={withLayout(MainLayout, UpdateCurrencies)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/quick-entries"
+        element={withLayout(MainLayout, QuickEntriesTable)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/add-quick-entry"
+        element={withLayout(MainLayout, AddQuickEntriesForm)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/update-quick-entry"
+        element={withLayout(MainLayout, UpdateQuickEntriesForm)}
       />
 
       <Route
