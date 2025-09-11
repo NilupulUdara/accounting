@@ -68,7 +68,7 @@ export default function UpdateSalesPerson() {
   const handleSubmit = () => {
     if (validate()) {
       console.log("Submitted Sales Person Data:", formData);
-      alert("Sales person added successfully!");
+      alert("Sales person updated successfully!");
     }
   };
 

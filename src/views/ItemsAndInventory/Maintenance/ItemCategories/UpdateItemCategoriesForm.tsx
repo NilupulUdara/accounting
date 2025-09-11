@@ -87,7 +87,7 @@ export default function UpdateItemCategoriesForm() {
   const handleSubmit = () => {
     if (validate()) {
       console.log("Submitted Data:", formData);
-      alert("Item Category added successfully!");
+      alert("Item Category updated successfully!");
     }
   };
 

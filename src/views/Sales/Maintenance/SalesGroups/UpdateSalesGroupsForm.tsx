@@ -42,7 +42,7 @@ export default function UpdateSalesGroupsForm() {
   const handleSubmit = () => {
     if (validate()) {
       console.log("Submitted Data:", formData);
-      alert("Sales Group added successfully!");
+      alert("Sales Group updated successfully!");
     }
   };
 

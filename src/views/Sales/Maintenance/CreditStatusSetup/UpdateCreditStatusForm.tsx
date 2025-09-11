@@ -62,7 +62,7 @@ export default function UpdateCreditStatusForm() {
   const handleSubmit = () => {
     if (validate()) {
       console.log("Submitted Data:", formData);
-      alert("Credit Status added successfully!");
+      alert("Credit Status updated successfully!");
     }
   };
 

@@ -97,6 +97,14 @@ import UpdateBankAccountsForm from "./views/BankindAndGeneralLedger/Maintenance/
 import AddQuickEntriesForm from "./views/BankindAndGeneralLedger/Maintenance/QuickEntries/AddQuickEntriesForm";
 import UpdateQuickEntriesForm from "./views/BankindAndGeneralLedger/Maintenance/QuickEntries/UpdateQuickEntriesForm";
 import QuickEntriesTable from "./views/BankindAndGeneralLedger/Maintenance/QuickEntries/QuickEntriesTable";
+import GlAccountGroupsTable from "./views/BankindAndGeneralLedger/Maintenance/GlAccountGroups/GlAccountGroupsTable";
+import AddGlAccountGroupsForm from "./views/BankindAndGeneralLedger/Maintenance/GlAccountGroups/AddGlAccountGroupsForm";
+import UpdateGlAccountGroupsForm from "./views/BankindAndGeneralLedger/Maintenance/GlAccountGroups/UpdateGlAccountGroupsForm";
+import RevaluateCurrenciesForm from "./views/BankindAndGeneralLedger/Maintenance/RevaluationOfCurrencyAccounts/RevaluateCurrencies";
+import GlAccountClassesTable from "./views/BankindAndGeneralLedger/Maintenance/GlAccountClasses/GlAccountClassesTable";
+import AddGlAccountClassesForm from "./views/BankindAndGeneralLedger/Maintenance/GlAccountClasses/AddGlAccountClassesForm";
+import UpdateGlAccountClassesForm from "./views/BankindAndGeneralLedger/Maintenance/GlAccountClasses/UpdateGlAccountClassesForm";
+import AddChartofAccounts from "./views/Setup/Maintenance/ChartOfAccounts/AddChartOfAccounts";
 
 const LoginPage = React.lazy(() => import("./views/LoginPage/LoginPage"));
 const RegistrationPage = React.lazy(
@@ -1007,6 +1015,34 @@ const AppRoutes = () => {
         path="/bankingandgeneralledger/maintenance/update-quick-entry"
         element={withLayout(MainLayout, UpdateQuickEntriesForm)}
       />
+      <Route
+        path="/bankingandgeneralledger/maintenance/gl-account-groups"
+        element={withLayout(MainLayout, GlAccountGroupsTable)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/add-gl-account-groups"
+        element={withLayout(MainLayout, AddGlAccountGroupsForm)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/update-gl-account-groups"
+        element={withLayout(MainLayout, UpdateGlAccountGroupsForm)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/gl-account-classes"
+        element={withLayout(MainLayout, GlAccountClassesTable)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/add-gl-account-classes"
+        element={withLayout(MainLayout, AddGlAccountClassesForm)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/update-gl-account-classes"
+        element={withLayout(MainLayout, UpdateGlAccountClassesForm)}
+      />
+      <Route
+        path="/bankingandgeneralledger/maintenance/revaluation-of-currency-accounts"
+        element={withLayout(MainLayout, RevaluateCurrenciesForm)}
+      />
 
       <Route
         path="/setup/companysetup"
@@ -1082,6 +1118,10 @@ const AppRoutes = () => {
       <Route
         path="/setup/maintenance"
         element={withLayout(MainLayout, SetupMaintenance)}
+      />
+      <Route
+        path="/setup/maintenance/install-chart-of-accounts"
+        element={withLayout(MainLayout, AddChartofAccounts)}
       />
 
       <Route

@@ -67,7 +67,7 @@ export default function UpdateInventoryLocationForm() {
   const handleSubmit = () => {
     if (validate()) {
       console.log("Submitted Data:", formData);
-      alert("Inventory Location added successfully!");
+      alert("Inventory Location updated successfully!");
     }
   };
 

@@ -59,7 +59,7 @@ export default function UpdateUnitsOfMeasureForm() {
   const handleSubmit = () => {
     if (validate()) {
       console.log("Submitted Data:", formData);
-      alert("Unit of Measure added successfully!");
+      alert("Unit of Measure updated successfully!");
     }
   };
 
