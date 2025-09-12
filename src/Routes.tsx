@@ -1061,7 +1061,7 @@ const AppRoutes = () => {
         element={withLayout(MainLayout, AddUserForm)}
       />
       <Route
-        path="/setup/companysetup/update-user"
+        path="/setup/companysetup/update-user/:id"
         element={withLayout(MainLayout, UpdateUserForm)}
       />
       <Route

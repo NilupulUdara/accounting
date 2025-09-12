@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Stack,
@@ -16,6 +16,9 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import theme from "../../../../theme";
+import { getUser, updateUser } from "../../../../api/UserManagement/userManagement";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface UserFormData {
   id: string;
@@ -48,10 +51,11 @@ export default function UpdateUserForm() {
   });
 
   const [errors, setErrors] = useState<Partial<UserFormData>>({});
-
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const muiTheme = useTheme();
-    const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
-
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
+  const queryClient = useQueryClient();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -59,6 +63,27 @@ export default function UpdateUserForm() {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    if (id) {
+      getUser(id).then(user => {
+        setFormData({
+          id: user.id,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          department: user.department || "",
+          epf: user.epf,
+          telephone: user.telephone || "",
+          address: user.address || "",
+          email: user.email,
+          password: "",
+          role: "",
+          status: "",
+        });
+      });
+    }
+  }, [id]);
+
 
   const handleSelectChange = (e: SelectChangeEvent<string>) => {
     const { name, value } = e.target;
@@ -96,10 +121,37 @@ export default function UpdateUserForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validate()) {
-      console.log("Submitted Data:", formData);
-      alert("Form submitted successfully!");
+      try {
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          department: formData.department,
+          epf: formData.epf,
+          telephone: formData.telephone,
+          address: formData.address,
+          email: formData.email,
+          password: formData.password,
+          role: formData.role,
+          status: formData.status
+        };
+
+        if (!formData.id) {
+          alert("User ID is required to update.");
+          return;
+        }
+
+        const updatedUser = await updateUser(formData.id, payload);
+        console.log("User updated:", updatedUser);
+        alert("User updated successfully!");
+        queryClient.invalidateQueries({ queryKey: ["users"] });
+        queryClient.refetchQueries({ queryKey: ["users"] });
+        navigate("/setup/companysetup/user-account-setup");
+      } catch (err: any) {
+        console.error("Error updating user:", err);
+        alert("Error updating user: " + JSON.stringify(err));
+      }
     }
   };
 
@@ -224,7 +276,7 @@ export default function UpdateUserForm() {
             <Select
               name="role"
               value={formData.role}
-              onChange={handleSelectChange} 
+              onChange={handleSelectChange}
               label="Role"
             >
               <MenuItem value="admin">Admin</MenuItem>
@@ -238,7 +290,7 @@ export default function UpdateUserForm() {
             <Select
               name="status"
               value={formData.status}
-              onChange={handleSelectChange} 
+              onChange={handleSelectChange}
               label="Status"
             >
               <MenuItem value="active">Active</MenuItem>

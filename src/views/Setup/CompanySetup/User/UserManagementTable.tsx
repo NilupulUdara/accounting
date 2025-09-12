@@ -27,97 +27,97 @@ import Breadcrumb from "../../../../components/BreadCrumb";
 import PageTitle from "../../../../components/PageTitle";
 import theme from "../../../../theme";
 import SearchBar from "../../../../components/SearchBar";
-
+import { getUsers, deleteUser } from "../../../../api/UserManagement/userManagement";
 // Mock API function
-const getUserList = async () => [
-  {
-    id: 1,
-    login: "john_doe",
-    fullName: "John Doe",
-    department: "Finance",
-    email: "john@example.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 2,
-    login: "jane_smith",
-    fullName: "Jane Smith",
-    department: "HR",
-    email: "jane@example.com",
-    role: "User",
-    status: "Inactive",
-  },
-  {
-    id: 3,
-    login: "john_doe",
-    fullName: "John Doe",
-    department: "Finance",
-    email: "john@example.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 4,
-    login: "jane_smith",
-    fullName: "Jane Smith",
-    department: "HR",
-    email: "jane@example.com",
-    role: "User",
-    status: "Inactive",
-  }, {
-    id: 5,
-    login: "john_doe",
-    fullName: "John Doe",
-    department: "Finance",
-    email: "john@example.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 6,
-    login: "jane_smith",
-    fullName: "Jane Smith",
-    department: "HR",
-    email: "jane@example.com",
-    role: "User",
-    status: "Inactive",
-  }, {
-    id: 7,
-    login: "john_doe",
-    fullName: "John Doe",
-    department: "Finance",
-    email: "john@example.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 8,
-    login: "jane_smith",
-    fullName: "Jane Smith",
-    department: "HR",
-    email: "jane@example.com",
-    role: "User",
-    status: "Inactive",
-  }, {
-    id: 9,
-    login: "john_doe",
-    fullName: "John Doe",
-    department: "Finance",
-    email: "john@example.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 10,
-    login: "jane_smith",
-    fullName: "Jane Smith",
-    department: "HR",
-    email: "jane@example.com",
-    role: "User",
-    status: "Inactive",
-  },
-];
+// const getUsers = async () => [
+//   {
+//     id: 1,
+//     login: "john_doe",
+//     fullName: "John Doe",
+//     department: "Finance",
+//     email: "john@example.com",
+//     role: "Admin",
+//     status: "Active",
+//   },
+//   {
+//     id: 2,
+//     login: "jane_smith",
+//     fullName: "Jane Smith",
+//     department: "HR",
+//     email: "jane@example.com",
+//     role: "User",
+//     status: "Inactive",
+//   },
+//   {
+//     id: 3,
+//     login: "john_doe",
+//     fullName: "John Doe",
+//     department: "Finance",
+//     email: "john@example.com",
+//     role: "Admin",
+//     status: "Active",
+//   },
+//   {
+//     id: 4,
+//     login: "jane_smith",
+//     fullName: "Jane Smith",
+//     department: "HR",
+//     email: "jane@example.com",
+//     role: "User",
+//     status: "Inactive",
+//   }, {
+//     id: 5,
+//     login: "john_doe",
+//     fullName: "John Doe",
+//     department: "Finance",
+//     email: "john@example.com",
+//     role: "Admin",
+//     status: "Active",
+//   },
+//   {
+//     id: 6,
+//     login: "jane_smith",
+//     fullName: "Jane Smith",
+//     department: "HR",
+//     email: "jane@example.com",
+//     role: "User",
+//     status: "Inactive",
+//   }, {
+//     id: 7,
+//     login: "john_doe",
+//     fullName: "John Doe",
+//     department: "Finance",
+//     email: "john@example.com",
+//     role: "Admin",
+//     status: "Active",
+//   },
+//   {
+//     id: 8,
+//     login: "jane_smith",
+//     fullName: "Jane Smith",
+//     department: "HR",
+//     email: "jane@example.com",
+//     role: "User",
+//     status: "Inactive",
+//   }, {
+//     id: 9,
+//     login: "john_doe",
+//     fullName: "John Doe",
+//     department: "Finance",
+//     email: "john@example.com",
+//     role: "Admin",
+//     status: "Active",
+//   },
+//   {
+//     id: 10,
+//     login: "jane_smith",
+//     fullName: "Jane Smith",
+//     department: "HR",
+//     email: "jane@example.com",
+//     role: "User",
+//     status: "Inactive",
+//   },
+// ];
 
 function UserManagementTable() {
   const [page, setPage] = useState(0);
@@ -127,9 +127,19 @@ function UserManagementTable() {
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
-  const { data: usersData = [] } = useQuery({
+  const { data: usersData = [], refetch } = useQuery({
     queryKey: ["users"],
-    queryFn: getUserList,
+    queryFn: async () => {
+      const data = await getUsers();
+      return data.map((user: any) => ({
+        id: user.id,
+        fullName: `${user.first_name} ${user.last_name}`,
+        department: user.department,
+        email: user.email,
+        role: user.role,
+        status: user.status
+      }));
+    },
   });
 
   const filteredUsers = useMemo(() => {
@@ -138,10 +148,10 @@ function UserManagementTable() {
     let filtered = usersData;
 
     if (!showInactive) {
-      filtered = filtered.filter((item) => item.status === "Active");
+      filtered = filtered.filter(item => item.status.toLowerCase() === "active");
     }
 
-    if (!searchQuery.trim()) {
+    if (searchQuery.trim()) {
       const lowerQuery = searchQuery.toLowerCase();
       filtered = filtered.filter(
         (user) =>
@@ -153,7 +163,7 @@ function UserManagementTable() {
       );
     }
     return filtered;
-    
+
   }, [usersData, searchQuery, showInactive]);
 
   const paginatedUsersData = useMemo(() => {
@@ -167,9 +177,19 @@ function UserManagementTable() {
     setPage(0);
   };
 
-  const handleDelete = (id: number) => {
-    alert(`Delete user with id: ${id}`);
+  const handleDelete = async (id: number) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      try {
+        await deleteUser(id);
+        alert("User deleted successfully!");
+        refetch();
+      } catch (error) {
+        console.error(error);
+        alert("Failed to delete user");
+      }
+    }
   };
+
 
   const breadcrumbItems = [
     { title: "Home", href: "/home" },
@@ -279,8 +299,7 @@ function UserManagementTable() {
                           variant="contained"
                           size="small"
                           startIcon={<EditIcon />}
-                          // onClick={() => navigate(`/setup/companysetup/update-user/${user.id}`)}
-                          onClick={() => navigate("/setup/companysetup/update-user")}
+                          onClick={() => navigate(`/setup/companysetup/update-user/${user.id}`)}
                         >
                           Edit
                         </Button>

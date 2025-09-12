@@ -16,6 +16,8 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import theme from "../../../../theme";
+import { createUser } from "../../../../api/UserManagement/userManagement";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface UserFormData {
   id: string;
@@ -30,7 +32,6 @@ interface UserFormData {
   role: string;
   status: string;
 }
-
 
 export default function AddUserForm() {
   const [formData, setFormData] = useState<UserFormData>({
@@ -49,9 +50,9 @@ export default function AddUserForm() {
 
   const [errors, setErrors] = useState<Partial<UserFormData>>({});
 
-const muiTheme = useTheme();
+  const muiTheme = useTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
-
+  const queryClient = useQueryClient();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -96,15 +97,53 @@ const muiTheme = useTheme();
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
+
+  const handleSubmit = async () => {
     if (validate()) {
-      console.log("Submitted Data:", formData);
-      alert("Form submitted successfully!");
+      try {
+        // Map frontend field names to backend field names
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          department: formData.department,
+          epf: formData.epf,
+          telephone: formData.telephone,
+          address: formData.address,
+          email: formData.email,
+          password: formData.password,
+          role: formData.role,
+          status: formData.status
+        };
+
+        const user = await createUser(payload);
+        console.log("User created:", user);
+        alert("User created successfully!");
+        queryClient.invalidateQueries({ queryKey: ["users"] });
+        queryClient.refetchQueries({ queryKey: ["users"] });
+        // Optional: reset form
+        // setFormData({
+        //   id: "",
+        //   firstName: "",
+        //   lastName: "",
+        //   department: "",
+        //   epf: "",
+        //   telephone: "",
+        //   address: "",
+        //   email: "",
+        //   password: "",
+        //   role: "",
+        //   status: "",
+        // });
+        setErrors({});
+      } catch (err: any) {
+        alert("Error creating user: " + JSON.stringify(err));
+      }
     }
   };
 
+
   return (
-<Stack alignItems="center" sx={{ mt: 4, px: isMobile ? 2 : 0 }}>
+    <Stack alignItems="center" sx={{ mt: 4, px: isMobile ? 2 : 0 }}>
       <Paper
         sx={{
           p: theme.spacing(3),
@@ -224,7 +263,7 @@ const muiTheme = useTheme();
             <Select
               name="role"
               value={formData.role}
-              onChange={handleSelectChange} 
+              onChange={handleSelectChange}
               label="Role"
             >
               <MenuItem value="admin">Admin</MenuItem>
@@ -238,7 +277,7 @@ const muiTheme = useTheme();
             <Select
               name="status"
               value={formData.status}
-              onChange={handleSelectChange} 
+              onChange={handleSelectChange}
               label="Status"
             >
               <MenuItem value="active">Active</MenuItem>
